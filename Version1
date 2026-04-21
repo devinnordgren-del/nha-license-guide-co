@@ -1,0 +1,13 @@
+site/
+├─ index.html              ← the guide (password-gated)
+├─ .nojekyll               ← tells GitHub Pages to serve files as-is
+├─ HOW-TO-PUBLISH.md       ← this file
+└─ documents/              ← all original Colorado PDFs (linked from the site)
+   ├─ 3-CCR-717-1.pdf
+   ├─ NHA-Practice-Act.pdf
+   ├─ NHA-Board-Policies.pdf
+   ├─ Key-Definitions-and-Actions.pdf
+   ├─ NHA-Experience-Verification.pdf
+   ├─ Pathway-2-Overview-Example.pdf
+   ├─ Colorado-NHA-License-Overview.pdf
+   └─ Colorado-NHA-License-Overview-v2.pdf
