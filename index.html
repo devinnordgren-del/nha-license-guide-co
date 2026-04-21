@@ -880,6 +880,15 @@ margin-bottom: 6px;
         <div class="field-grid one">
           <div class="field-group"><label>Institution Name</label><input type="text" id="p1-school" placeholder="University Name"></div>
         </div>
+        <div class="field-grid one">
+          <div class="field-group">
+            <label>Have you already passed the NAB National Examinations (Core + NHA)?</label>
+            <select id="p1-nabtaken" style="padding:12px 14px; background:white; border:1px solid var(--border); border-radius:8px; font-family:inherit; font-size:14px; color:var(--ink); width:100%;">
+              <option value="no" selected>No — I have not yet taken NAB</option>
+              <option value="yes">Yes — I have already passed NAB</option>
+            </select>
+          </div>
+        </div>
         <button class="generate-btn" onclick="generateP1Overview()">⚡ Generate Document</button>
       </div>
       <div id="p1-overview-output" style="display:none; margin-top:20px;">
@@ -1057,6 +1066,15 @@ margin-bottom: 6px;
       <div class="field-group"><label>Number of Direct Reports</label><input type="text" id="p2-reports" placeholder="e.g. 6"></div>
       <div class="field-group"><label>Other State NHA License # (if held)</label><input type="text" id="p2-otherlicense" placeholder="e.g. Montana NHA 12345 (optional)"></div>
     </div>
+    <div class="field-grid one">
+      <div class="field-group">
+        <label>Have you already passed the NAB National Examinations (Core + NHA)?</label>
+        <select id="p2-nabtaken" style="padding:12px 14px; background:white; border:1px solid var(--border); border-radius:8px; font-family:inherit; font-size:14px; color:var(--ink); width:100%;">
+          <option value="no" selected>No — I have not yet taken NAB</option>
+          <option value="yes">Yes — I have already passed NAB</option>
+        </select>
+      </div>
+    </div>
 
 
     <button class="generate-btn" onclick="generateP2All()">⚡ Generate All Documents</button>
@@ -1068,7 +1086,7 @@ margin-bottom: 6px;
 
 
     <h2>Generated Documents — Ready to Print</h2>
-    <div class="box box-sage">✅ All three documents have been generated with your information. Use the Print buttons to open the print dialog — select "Save as PDF" to create a downloadable file for each document.</div>
+    <div class="box box-sage">✅ Your documents have been generated. The <strong>Application Overview</strong> and <strong>Job Description</strong> can be printed / saved as PDF using the buttons below. The <strong>Verification of Experience</strong> generated previews are <u>examples only</u> — use them as a reference for how to fill out the real form, then download and sign the official DORA PDF linked at the top of the Verification section.</div>
 
 
     <div class="collapsible">
@@ -1081,20 +1099,18 @@ margin-bottom: 6px;
 
 
     <div class="collapsible" style="margin-top:10px;">
-      <button class="coll-head" onclick="toggleColl(this)">📄 Document 2 — Official DORA Verification of Experience (Facility 1) <span class="coll-arrow">▼</span></button>
+      <button class="coll-head" onclick="toggleColl(this)">📄 Example Only — How to Fill Out the Verification of Experience (Facility 1) <span class="coll-arrow">▼</span></button>
       <div class="coll-body open">
-        <div class="box box-blush" style="margin-bottom:12px; font-size:13px;"><strong>📌 Convenience Template — Pre-filled with Your Information</strong> This is a convenience template populated with the data you entered above. For the official blank form published by DORA, use the <a href="documents/NHA-Experience-Verification.pdf" target="_blank" rel="noopener"><strong>Open / Download Official Verification Form (PDF)</strong></a> button in the section above and print one copy per facility.</div>
-        <button class="download-btn" onclick="printSection('p2-dora1-print')" style="margin-bottom:16px;">🖨 Print / Save as PDF</button>
+        <div class="box box-rose" style="margin-bottom:12px; font-size:13px;"><strong>🚫 Example Only — Do Not Submit This</strong> The preview below shows how your Facility 1 verification form should be filled out using the data you entered. It is an <u>example</u>, not a submittable document. To submit, download the official blank DORA form here: <a href="documents/NHA-Experience-Verification.pdf" target="_blank" rel="noopener"><strong>Open / Download Official Verification Form (PDF)</strong></a>, print one copy per facility, fill it out by hand or digitally to match this example, and have the Licensed NHA sign the official form.</div>
         <div id="p2-dora1-content" class="dora-form"></div>
       </div>
     </div>
 
 
     <div id="p2-dora2-wrap" class="collapsible" style="margin-top:10px; display:none;">
-      <button class="coll-head" onclick="toggleColl(this)">📄 Document 3 — Official DORA Verification of Experience (Facility 2) <span class="coll-arrow">▼</span></button>
+      <button class="coll-head" onclick="toggleColl(this)">📄 Example Only — How to Fill Out the Verification of Experience (Facility 2) <span class="coll-arrow">▼</span></button>
       <div class="coll-body open">
-        <div class="box box-blush" style="margin-bottom:12px; font-size:13px;"><strong>📌 Convenience Template — Pre-filled for Facility 2</strong> Populated with the data you entered for Facility 2. For the official blank form, use the <a href="documents/NHA-Experience-Verification.pdf" target="_blank" rel="noopener"><strong>Open / Download Official Verification Form (PDF)</strong></a> link above.</div>
-        <button class="download-btn" onclick="printSection('p2-dora2-print')" style="margin-bottom:16px;">🖨 Print / Save as PDF</button>
+        <div class="box box-rose" style="margin-bottom:12px; font-size:13px;"><strong>🚫 Example Only — Do Not Submit This</strong> The preview below shows how your Facility 2 verification form should be filled out. It is an <u>example</u>, not a submittable document. Download the official blank DORA form here: <a href="documents/NHA-Experience-Verification.pdf" target="_blank" rel="noopener"><strong>Open / Download Official Verification Form (PDF)</strong></a>, print it, and have the Licensed NHA at Facility 2 sign the official form.</div>
         <div id="p2-dora2-content" class="dora-form"></div>
       </div>
     </div>
@@ -1413,64 +1429,11 @@ return `
 }
 
 
-// ── OVERVIEW HTML (Pathway 1) ──
-function generateP1Overview() {
-const fn = v('p1-fname'), ln = v('p1-lname'), dob = v('p1-dob'), appdate = v('p1-appdate');
-const deg = v('p1-degree') || 'Master of Business Administration', school = v('p1-school') || 'Regionally accredited institution';
-const fullName = fn + ' ' + ln;
-const html = `
-
-
-  <div class="ov-header">
-    <div class="ov-title">APPLICATION FOR INITIAL LICENSURE BY EXAMINATION</div>
-    <div class="ov-sub">Colorado Board of Examiners of Nursing Home Administrators | 3 CCR 717-1</div>
-    <div class="ov-meta">
-      <span><strong>Applicant:</strong> ${fullName}</span>
-      <span><strong>Date of Birth:</strong> ${dob}</span>
-      <span><strong>Application Date:</strong> ${appdate}</span>
-      <span><strong>Licensure Pathway:</strong> Initial Licensure by Examination — Rule 1.7(B)</span>
-    </div>
-  </div>
-  <div class="ov-section-title">Compliance Overview</div>
-  <p class="ov-body">This application satisfies all requirements for licensure by examination under 3 CCR 717-1.7. Each requirement, its governing rule citation, and its supporting documentation are summarized below.</p>
-  <table class="ov-table">
-    <tr><th>Requirement</th><th>Rule Citation</th><th>Status</th><th>Supporting Basis</th></tr>
-    <tr><td>Education</td><td>Rule 1.7(B)</td><td><span class="ov-status">Met</span></td><td>${deg} from ${school}. Degree qualifies applicant to sit for examination immediately under Rule 1.7(B) with no additional experience required.</td></tr>
-    <tr><td>National Examination</td><td>Rule 1.6</td><td><span class="ov-status">Met</span></td><td>Passing scores on NAB Core and NHA modules. Official score reports will be delivered directly from NAB to the Board.</td></tr>
-  </table>
-  <div class="ov-section-title">1. Education</div>
-  <p class="ov-body"><strong>Requirement — Rule 1.7(B):</strong> A qualifying Master's degree from a regionally accredited institution. No additional experience required.</p>
-  <ul class="ov-bullet">
-    <li><strong>Degree:</strong> ${deg}</li>
-    <li><strong>Institution:</strong> ${school}</li>
-    <li><strong>Transcripts:</strong> Official transcripts have been ordered from the university and will be delivered directly to the Board via the official transcript delivery system. If transcripts have already been received, please confirm receipt.</li>
-  </ul>
-  <div class="ov-section-title">2. National Examination</div>
-  <p class="ov-body"><strong>Requirement — Rule 1.6:</strong> Passing score on the examinations administered by the National Association of Long Term Care Administrator Boards (NAB).</p>
-  <ul class="ov-bullet">
-    <li>NAB Core examination — passing score verified</li>
-    <li>NHA module examination — passing score verified</li>
-    <li>Official score reports have been requested and will be directly delivered from NAB to the Board.</li>
-  </ul>
-  <div class="ov-section-title">3. Document Inventory</div>
-  <table class="ov-table">
-    <tr><th>#</th><th>Document</th><th>Satisfies</th></tr>
-    <tr><td>1</td><td>Official University Transcripts — ${deg}</td><td>Rule 1.7(B) — Education requirement</td></tr>
-    <tr><td>2</td><td>NAB Score Reports — Core and NHA Modules</td><td>Rule 1.6 — National examination</td></tr>
-  </table>
-  <div class="ov-section-title">4. Conclusion</div>
-  <p class="ov-body">All requirements for initial licensure by examination under 3 CCR 717-1.7(B) have been satisfied. The applicant holds a qualifying Master's degree from a regionally accredited institution and has passed the required national examinations.</p>
-  <p class="ov-body"><strong>This application is submitted for the Board's approval.</strong></p>
-  <div style="margin-top:28px; display:grid; grid-template-columns:1fr 1fr; gap:24px;">
-    <div><div style="border-bottom:1px solid #000;height:32px;"></div><div style="font-size:10px;color:#444;margin-top:3px;">Applicant Signature</div><div style="font-size:11px;margin-top:2px;color:#222;">${fullName} &nbsp;&nbsp; Date: ___________</div></div>
-  </div>`;
-  fill('p1-overview-content', html);
-  document.getElementById('p1-overview-output').style.display = 'block';
-}
+// (old duplicate generateP1Overview removed — single definition lives below)
 
 
 // ── OVERVIEW HTML (Pathway 2) ──
-function p2OverviewHTML(fn, ln, dob, appdate, deg, school, f1n, f1city, f1start, f1end, f2n, f2city, f2start, f2end, reports, otherlicense) {
+function p2OverviewHTML(fn, ln, dob, appdate, deg, school, f1n, f1city, f1start, f1end, f2n, f2city, f2start, f2end, reports, otherlicense, nabTaken) {
 const fullName = fn + ' ' + ln;
 const hasFac2 = f2n && f2n.trim() !== '';
 const facilities = hasFac2 ? `${f1n} and ${f2n}` : f1n;
@@ -1503,7 +1466,7 @@ return `
     <tr><td>Experience — Quantity</td><td>Rule 1.7(C)</td><td><span class="ov-status">Met</span></td><td>One full year of qualifying experience: ${f1start} – ${f2end || f1end}. Within the two-year lookback window.</td></tr>
     <tr><td>Experience — Quality</td><td>Rule 1.7(E)</td><td><span class="ov-status">Met</span></td><td>Documented on-site supervisory authority over ${reports || '[#]'} direct reports, IDT coordination, and budget and policy responsibilities${hasFac2 ? ' at both facilities' : ''}.</td></tr>
     <tr><td>Experience — Excluded Duties</td><td>Rule 1.7(F)</td><td><span class="ov-status">Met</span></td><td>Role contained no housekeeping, laundry, food service, activities, medical records, bookkeeping, or clerical responsibilities.</td></tr>
-    <tr><td>National Examination</td><td>Rule 1.6</td><td><span class="ov-status">Met</span></td><td>Passing scores on NAB Core and NHA modules. Official score reports will be delivered directly from NAB to the Board.</td></tr>
+    ${nabTaken ? `<tr><td>National Examination</td><td>Rule 1.6</td><td><span class="ov-status">Met</span></td><td>Passing scores on NAB Core and NHA modules. Official score reports will be delivered directly from NAB to the Board.</td></tr>` : `<tr><td>National Examination</td><td>Rule 1.6</td><td><span class="ov-status" style="color:#7a5a1a;">Pending — Post-Approval</span></td><td>Applicant has not yet taken the NAB national examination. Per Colorado rules, the Board will authorize the applicant to schedule and sit for NAB after this application is approved.</td></tr>`}
     <tr><td>Employer Verification</td><td>Rule 1.7</td><td><span class="ov-status">Met</span></td><td>Signed verification forms from Licensed Nursing Home Administrators at ${facilities}.</td></tr>
   </table>
   <div class="ov-section-title">1. Education</div>
@@ -1528,11 +1491,11 @@ return `
   </table>
   <div class="ov-section-title">3. National Examination</div>
   <p class="ov-body"><strong>Requirement — Rule 1.6:</strong> Passing score on the examinations administered by the National Association of Long Term Care Administrator Boards (NAB).</p>
-  <ul class="ov-bullet">
+  ${nabTaken ? `<ul class="ov-bullet">
     <li>NAB Core examination — passing score verified</li>
     <li>NHA module examination — passing score verified</li>
     <li>Official score reports have been requested and will be directly delivered from NAB to the Board.</li>
-  </ul>
+  </ul>` : `<p class="ov-body"><strong>The applicant has not yet taken the NAB national examination.</strong> Per Colorado rules, the NAB examination is <u>not</u> a prerequisite to submitting this application. The Board will authorize the applicant to schedule and sit for both the NAB Core and NHA module examinations after this application is approved. Once NAB is passed, official score reports will be delivered directly from NAB to the Board to satisfy Rule 1.6.</p>`}
   <div class="ov-section-title">4. Document Inventory</div>
   <table class="ov-table">
     <tr><th>#</th><th>Document</th><th>Satisfies</th></tr>
@@ -1541,11 +1504,11 @@ return `
     <tr><td>${hasFac2 ? '3' : '2'}</td><td>Job Description — ANHA, ${f1n}</td><td>Rule 1.7(E)(F) — Administrative duties</td></tr>
     ${hasFac2 ? `<tr><td>4</td><td>Job Description — ANHA, ${f2n}</td><td>Rule 1.7(E)(F) — Administrative duties</td></tr>` : ''}
     <tr><td>${hasFac2 ? '5' : '3'}</td><td>Official University Transcripts — ${deg}</td><td>Rule 1.7(C) — Education requirement</td></tr>
-    <tr><td>${hasFac2 ? '6' : '4'}</td><td>NAB Score Reports — Core and NHA Modules</td><td>Rule 1.6 — National examination</td></tr>
+    ${nabTaken ? `<tr><td>${hasFac2 ? '6' : '4'}</td><td>NAB Score Reports — Core and NHA Modules</td><td>Rule 1.6 — National examination</td></tr>` : ''}
     ${otherLicRow}
   </table>
   <div class="ov-section-title">5. Conclusion</div>
-  <p class="ov-body">All requirements for initial licensure by examination under 3 CCR 717-1.7(C) have been satisfied. The applicant holds a qualifying degree, has completed one year of documented administrative experience in skilled nursing facilities, has passed the required national examinations, and has submitted all supporting documentation verified by Licensed Nursing Home Administrators.</p>
+  <p class="ov-body">The applicant has satisfied the education, experience, and documentation requirements for initial licensure by examination under 3 CCR 717-1.7(C). The applicant holds a qualifying degree, has completed one year of documented administrative experience in skilled nursing facilities, and has submitted all supporting documentation verified by Licensed Nursing Home Administrators. ${nabTaken ? 'The applicant has also passed the required NAB national examinations.' : 'The NAB national examination has not yet been taken; per Colorado rules, the Board will authorize the applicant to schedule and sit for NAB after this application is approved.'}</p>
   <p class="ov-body"><strong>This application is submitted for the Board's approval.</strong></p>
   <div style="margin-top:28px; display:grid; grid-template-columns:1fr 1fr; gap:24px;">
     <div><div style="border-bottom:1px solid #000;height:32px;"></div><div style="font-size:10px;color:#444;margin-top:3px;">Applicant Signature</div><div style="font-size:11px;margin-top:2px;color:#222;">${fullName} &nbsp;&nbsp; Date: ___________</div></div>
@@ -1612,10 +1575,11 @@ const f2n=v('p2-f2name'), f2city=v('p2-f2city'), f2addr=v('p2-f2addr'), f2csz=v(
 const f2start=v('p2-f2start'), f2end=v('p2-f2end'), f2hrs=v('p2-f2hrs');
 const f2nha=v('p2-f2nha'), f2lic=v('p2-f2lic');
 const reports=v('p2-reports'), otherlicense=v('p2-otherlicense');
+const nabTaken = (document.getElementById('p2-nabtaken') && document.getElementById('p2-nabtaken').value) === 'yes';
 const hasFac2 = f2n && f2n.trim() !== '';
 
 
-fill('p2-ov-content', p2OverviewHTML(fn,ln,dob,appdate,deg,school,f1n,f1city,f1start,f1end,f2n,f2city,f2start,f2end,reports,otherlicense));
+fill('p2-ov-content', p2OverviewHTML(fn,ln,dob,appdate,deg,school,f1n,f1city,f1start,f1end,f2n,f2city,f2start,f2end,reports,otherlicense,nabTaken));
 fill('p2-dora1-content', doraFormHTML(fn,ln,dob,f1n,f1addr,f1csz,f1start,f1end,f1hrs,f1nha,f1lic));
 fill('p2-jd-content', jdHTML(fn,ln,dob,f1n,f1start,f1nha,reports));
 
@@ -1698,7 +1662,31 @@ const html = `
 function generateP1Overview() {
 const fn=v('p1-fname'), ln=v('p1-lname'), dob=v('p1-dob'), appdate=v('p1-appdate');
 const deg=v('p1-degree')||'Master of Business Administration', school=v('p1-school')||'Regionally accredited institution';
+const nabTaken = (document.getElementById('p1-nabtaken') && document.getElementById('p1-nabtaken').value) === 'yes';
 const fullName = fn + ' ' + ln;
+
+// Conditional rows and sections based on NAB status
+const nabRow = nabTaken
+  ? `<tr><td>National Examination</td><td>Rule 1.6</td><td><span class="ov-status">Met</span></td><td>Passing scores on NAB Core and NHA modules. Score reports to be delivered directly from NAB to the Board.</td></tr>`
+  : '';
+const nabSection = nabTaken
+  ? `<div class="ov-section-title">2. National Examination</div>
+  <p class="ov-body"><strong>Requirement — Rule 1.6:</strong> Passing score on examinations administered by the National Association of Long Term Care Administrator Boards (NAB).</p>
+  <ul class="ov-bullet">
+    <li>NAB Core examination — passing score verified</li>
+    <li>NHA module examination — passing score verified</li>
+    <li>Official score reports have been requested and will be directly delivered from NAB to the Board.</li>
+  </ul>`
+  : '';
+const nabInventoryRow = nabTaken
+  ? `<tr><td>2</td><td>NAB Score Reports — Core and NHA Modules</td><td>Rule 1.6 — National examination</td></tr>`
+  : '';
+const inventoryHeader = nabTaken ? '3. Document Inventory' : '2. Document Inventory';
+const conclusionHeader = nabTaken ? '4. Conclusion' : '3. Conclusion';
+const conclusionText = nabTaken
+  ? `All requirements for initial licensure by examination under 3 CCR 717-1.7(B) have been satisfied. The applicant holds a qualifying Master's degree from a regionally accredited institution and has passed the required national examinations.`
+  : `The applicant has satisfied the education requirement for initial licensure by examination under 3 CCR 717-1.7(B) and holds a qualifying Master's degree from a regionally accredited institution. The applicant has not yet taken the NAB national examination; per Colorado rules, the Board will authorize the applicant to schedule and sit for NAB after the application is approved.`;
+
 const html = `
 
 
@@ -1713,11 +1701,11 @@ const html = `
     </div>
   </div>
   <div class="ov-section-title">Compliance Overview</div>
-  <p class="ov-body">This application satisfies all requirements for licensure by examination under 3 CCR 717-1.7(B). The applicant holds a qualifying Master's degree from a regionally accredited institution. No additional experience is required under this pathway.</p>
+  <p class="ov-body">This application satisfies the requirements for licensure by examination under 3 CCR 717-1.7(B). The applicant holds a qualifying Master's degree from a regionally accredited institution. No additional experience is required under this pathway.</p>
   <table class="ov-table">
     <tr><th>Requirement</th><th>Rule Citation</th><th>Status</th><th>Supporting Basis</th></tr>
     <tr><td>Education</td><td>Rule 1.7(B)</td><td><span class="ov-status">Met</span></td><td>${deg} from ${school}. Degree qualifies applicant to sit for examination immediately with no experience required.</td></tr>
-    <tr><td>National Examination</td><td>Rule 1.6</td><td><span class="ov-status">Met</span></td><td>Passing scores on NAB Core and NHA modules. Score reports to be delivered directly from NAB to the Board.</td></tr>
+    ${nabRow}
   </table>
   <div class="ov-section-title">1. Education</div>
   <p class="ov-body"><strong>Requirement — Rule 1.7(B):</strong> A qualifying Master's degree from a regionally accredited institution. No additional experience required.</p>
@@ -1726,21 +1714,15 @@ const html = `
     <li><strong>Institution:</strong> ${school}</li>
     <li><strong>Transcripts:</strong> Official transcripts have been ordered from the university and will be delivered directly to the Board via the official transcript delivery system. If transcripts have already been received, please confirm receipt.</li>
   </ul>
-  <div class="ov-section-title">2. National Examination</div>
-  <p class="ov-body"><strong>Requirement — Rule 1.6:</strong> Passing score on examinations administered by the National Association of Long Term Care Administrator Boards (NAB).</p>
-  <ul class="ov-bullet">
-    <li>NAB Core examination — passing score verified</li>
-    <li>NHA module examination — passing score verified</li>
-    <li>Official score reports have been requested and will be directly delivered from NAB to the Board.</li>
-  </ul>
-  <div class="ov-section-title">3. Document Inventory</div>
+  ${nabSection}
+  <div class="ov-section-title">${inventoryHeader}</div>
   <table class="ov-table">
     <tr><th>#</th><th>Document</th><th>Satisfies</th></tr>
     <tr><td>1</td><td>Official University Transcripts — ${deg}</td><td>Rule 1.7(B) — Education requirement</td></tr>
-    <tr><td>2</td><td>NAB Score Reports — Core and NHA Modules</td><td>Rule 1.6 — National examination</td></tr>
+    ${nabInventoryRow}
   </table>
-  <div class="ov-section-title">4. Conclusion</div>
-  <p class="ov-body">All requirements for initial licensure by examination under 3 CCR 717-1.7(B) have been satisfied. The applicant holds a qualifying Master's degree from a regionally accredited institution and has passed the required national examinations.</p>
+  <div class="ov-section-title">${conclusionHeader}</div>
+  <p class="ov-body">${conclusionText}</p>
   <p class="ov-body"><strong>This application is submitted for the Board's approval.</strong></p>
   <div style="margin-top:28px; display:grid; grid-template-columns:1fr 1fr; gap:24px;">
     <div><div style="border-bottom:1px solid #000;height:32px;"></div><div style="font-size:10px;color:#444;margin-top:3px;">Applicant Signature</div><div style="font-size:11px;margin-top:2px;color:#222;">${fullName} &nbsp;&nbsp; Date: ___________</div></div>
