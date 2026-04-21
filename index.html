@@ -1,0 +1,1775 @@
+﻿<!DOCTYPE html>
+
+
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>NHA Colorado Licensure Guide</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400&family=DM+Sans:wght@300;400;500;600&display=swap');
+
+
+:root {
+--sage: #7a9e87;
+--sage-light: #e8f0eb;
+--sage-dark: #4a7059;
+--slate: #6b7fa3;
+--slate-light: #e8edf5;
+--slate-dark: #3d5080;
+--blush: #c4a882;
+--blush-light: #f5ede0;
+--rose: #c47878;
+--rose-light: #f5e8e8;
+--cream: #faf8f5;
+--white: #ffffff;
+--ink: #2c2c2c;
+--ink-mid: #4a4a4a;
+--ink-light: #7a7a7a;
+--border: #ddd8d0;
+--border-light: #ece8e2;
+}
+
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+
+body {
+font-family: 'DM Sans', sans-serif;
+background: #2a3545;
+min-height: 100vh;
+}
+
+
+/* ── PASSWORD ── */
+#pw-screen {
+min-height: 100vh;
+display: flex;
+align-items: center;
+justify-content: center;
+flex-direction: column;
+background: linear-gradient(160deg, #2a3545 0%, #1e2d3d 60%, #2a3545 100%);
+}
+
+
+.pw-wrap {
+background: rgba(255,255,255,0.05);
+border: 1px solid rgba(255,255,255,0.1);
+border-radius: 20px;
+padding: 52px 48px;
+width: 100%;
+max-width: 400px;
+text-align: center;
+backdrop-filter: blur(12px);
+}
+
+
+.pw-icon { font-size: 36px; margin-bottom: 20px; }
+
+
+.pw-title {
+font-family: 'Cormorant Garamond', serif;
+color: #e8e4dc;
+font-size: 24px;
+font-weight: 600;
+margin-bottom: 6px;
+letter-spacing: 0.3px;
+}
+
+
+.pw-sub {
+color: #8a9aaa;
+font-size: 13px;
+line-height: 1.7;
+margin-bottom: 28px;
+}
+
+
+.pw-input {
+width: 100%;
+padding: 13px 18px;
+background: rgba(255,255,255,0.06);
+border: 1px solid rgba(255,255,255,0.12);
+border-radius: 10px;
+color: #e8e4dc;
+font-size: 15px;
+font-family: 'DM Sans', sans-serif;
+letter-spacing: 3px;
+text-align: center;
+outline: none;
+transition: border-color 0.2s;
+margin-bottom: 12px;
+}
+.pw-input::placeholder { letter-spacing: 0; color: #566070; }
+.pw-input:focus { border-color: rgba(122,158,135,0.5); }
+
+
+.pw-btn {
+width: 100%;
+padding: 13px;
+background: var(--sage);
+color: white;
+border: none;
+border-radius: 10px;
+font-size: 14px;
+font-weight: 600;
+font-family: 'DM Sans', sans-serif;
+cursor: pointer;
+letter-spacing: 0.5px;
+transition: background 0.2s;
+}
+.pw-btn:hover { background: var(--sage-dark); }
+.pw-error { color: #e8a0a0; font-size: 13px; margin-top: 10px; display: none; }
+
+
+/* ── APP ── */
+#app { display: none; min-height: 100vh; background: var(--cream); flex-direction: column; }
+#app.visible { display: flex; }
+
+
+/* Header */
+.app-header {
+background: #2a3545;
+padding: 18px 48px;
+display: flex;
+align-items: center;
+justify-content: space-between;
+position: sticky;
+top: 0;
+z-index: 200;
+}
+
+
+.header-left { display: flex; align-items: center; gap: 16px; }
+
+
+.header-dot {
+width: 10px; height: 10px;
+background: var(--sage);
+border-radius: 50%;
+}
+
+
+.header-title {
+font-family: 'Cormorant Garamond', serif;
+color: #e8e4dc;
+font-size: 19px;
+font-weight: 600;
+letter-spacing: 0.2px;
+}
+
+
+.header-sub { color: #6a7a8a; font-size: 11px; margin-top: 1px; }
+
+
+.header-badge {
+background: rgba(122,158,135,0.15);
+border: 1px solid rgba(122,158,135,0.3);
+color: #a8c4b0;
+font-size: 10px;
+padding: 4px 12px;
+border-radius: 20px;
+font-weight: 600;
+letter-spacing: 1px;
+text-transform: uppercase;
+}
+
+
+/* Tab nav */
+.tab-nav {
+background: #232f3e;
+display: flex;
+padding: 0 48px;
+gap: 0;
+border-bottom: 1px solid rgba(255,255,255,0.05);
+overflow-x: auto;
+}
+
+
+.tab-btn {
+padding: 14px 22px;
+background: none;
+border: none;
+color: #6a7a8a;
+font-size: 13px;
+font-weight: 500;
+font-family: 'DM Sans', sans-serif;
+cursor: pointer;
+border-bottom: 2px solid transparent;
+white-space: nowrap;
+transition: all 0.2s;
+letter-spacing: 0.2px;
+}
+.tab-btn:hover { color: #a8b8c8; }
+.tab-btn.active { color: #c8d8e8; border-bottom-color: var(--sage); }
+
+
+/* Content area */
+.tab-content { display: none; }
+.tab-content.active { display: block; }
+
+
+.content-wrap {
+max-width: 980px;
+margin: 0 auto;
+padding: 48px 40px;
+width: 100%;
+}
+
+
+/* Typography */
+h1 {
+font-family: 'Cormorant Garamond', serif;
+color: var(--ink);
+font-size: 32px;
+font-weight: 700;
+margin-bottom: 8px;
+letter-spacing: -0.3px;
+}
+
+
+.page-sub { color: var(--ink-light); font-size: 14px; margin-bottom: 32px; line-height: 1.6; }
+
+
+h2 {
+font-family: 'Cormorant Garamond', serif;
+color: var(--ink);
+font-size: 21px;
+font-weight: 600;
+margin: 36px 0 14px;
+padding-bottom: 10px;
+border-bottom: 1px solid var(--border);
+}
+
+
+h3 { color: var(--slate-dark); font-size: 13px; font-weight: 600; margin: 18px 0 8px; text-transform: uppercase; letter-spacing: 0.8px; }
+
+
+p { color: var(--ink-mid); font-size: 14px; line-height: 1.75; margin-bottom: 10px; }
+
+
+/* Cards */
+.card {
+background: var(--white);
+border: 1px solid var(--border-light);
+border-radius: 12px;
+overflow: hidden;
+margin: 14px 0;
+box-shadow: 0 1px 4px rgba(0,0,0,0.04);
+}
+
+
+.card-head {
+padding: 13px 20px;
+font-size: 13px;
+font-weight: 600;
+display: flex;
+align-items: center;
+gap: 8px;
+border-bottom: 1px solid var(--border-light);
+}
+
+
+.card-body { padding: 20px; }
+
+
+/* Info boxes */
+.box {
+border-radius: 10px;
+padding: 16px 20px;
+margin: 14px 0;
+font-size: 14px;
+line-height: 1.7;
+}
+
+
+.box-sage { background: var(--sage-light); border-left: 3px solid var(--sage); color: #2e4a38; }
+.box-slate { background: var(--slate-light); border-left: 3px solid var(--slate); color: #2a3860; }
+.box-rose { background: var(--rose-light); border-left: 3px solid var(--rose); color: #6b2020; }
+.box-blush { background: var(--blush-light); border-left: 3px solid var(--blush); color: #5a3c1a; }
+
+
+.box strong { display: block; margin-bottom: 4px; font-size: 13px; text-transform: uppercase; letter-spacing: 0.5px; }
+
+
+/* Philosophy */
+.philosophy {
+background: linear-gradient(135deg, #2a3545, #3d5068);
+border-radius: 12px;
+padding: 28px 32px;
+margin: 24px 0;
+}
+.philosophy h3 { color: #a8c4b0; margin-top: 0; }
+.philosophy p, .philosophy li { color: #c8d8e4; font-size: 14px; line-height: 1.75; }
+.philosophy ul { padding-left: 20px; }
+.philosophy li { margin-bottom: 8px; }
+
+
+/* Steps */
+.steps { display: flex; flex-direction: column; gap: 6px; margin: 16px 0; }
+
+
+.step {
+display: flex;
+align-items: flex-start;
+gap: 14px;
+background: var(--white);
+border: 1px solid var(--border-light);
+border-radius: 10px;
+padding: 14px 18px;
+}
+
+
+.step-num {
+background: var(--slate-dark);
+color: white;
+width: 30px; height: 30px;
+border-radius: 50%;
+display: flex;
+align-items: center;
+justify-content: center;
+font-weight: 700;
+font-size: 13px;
+flex-shrink: 0;
+}
+
+
+.step.final .step-num { background: var(--sage-dark); }
+.step-label { font-weight: 600; color: var(--ink); font-size: 14px; margin-bottom: 3px; }
+.step-detail { color: var(--ink-mid); font-size: 13px; line-height: 1.65; }
+
+
+/* Checklist */
+.checklist { list-style: none; }
+.checklist li {
+display: flex;
+gap: 12px;
+padding: 11px 0;
+border-bottom: 1px solid var(--border-light);
+font-size: 14px;
+color: var(--ink-mid);
+align-items: flex-start;
+}
+.checklist li:last-child { border-bottom: none; }
+.checklist li::before { content: "☐"; color: var(--sage); font-size: 16px; flex-shrink: 0; margin-top: 1px; }
+.checklist li strong { color: var(--ink); display: block; margin-bottom: 2px; font-size: 14px; }
+.checklist li .sub { font-size: 12px; color: var(--ink-light); margin-top: 2px; }
+
+
+/* Collapsible */
+.collapsible { border: 1px solid var(--border); border-radius: 10px; margin: 10px 0; overflow: hidden; }
+.coll-head {
+background: #f5f2ee;
+padding: 14px 18px;
+cursor: pointer;
+display: flex;
+align-items: center;
+justify-content: space-between;
+font-weight: 600;
+color: var(--ink);
+font-size: 14px;
+border: none;
+width: 100%;
+text-align: left;
+font-family: 'DM Sans', sans-serif;
+transition: background 0.15s;
+}
+.coll-head:hover { background: #ede9e4; }
+.coll-arrow { transition: transform 0.2s; color: var(--ink-light); font-size: 11px; }
+.coll-head.open .coll-arrow { transform: rotate(180deg); }
+.coll-body { display: none; padding: 24px; border-top: 1px solid var(--border-light); background: var(--white); }
+.coll-body.open { display: block; }
+
+
+/* Auto-fill form */
+.autofill-section {
+background: linear-gradient(135deg, #f0ede8, #e8edf5);
+border: 1px solid var(--border);
+border-radius: 12px;
+padding: 28px 32px;
+margin: 24px 0;
+}
+.autofill-section h3 { color: var(--slate-dark); margin-top: 0; margin-bottom: 16px; }
+
+
+.field-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-bottom: 14px; }
+.field-grid.three { grid-template-columns: 1fr 1fr 1fr; }
+.field-grid.one { grid-template-columns: 1fr; }
+
+
+.field-group { display: flex; flex-direction: column; gap: 5px; }
+.field-group label { font-size: 11px; font-weight: 600; color: var(--slate-dark); text-transform: uppercase; letter-spacing: 0.5px; }
+
+
+.field-group input, .field-group select {
+padding: 9px 12px;
+border: 1px solid var(--border);
+border-radius: 7px;
+font-size: 13px;
+font-family: 'DM Sans', sans-serif;
+color: var(--ink);
+background: var(--white);
+outline: none;
+transition: border-color 0.2s;
+}
+.field-group input:focus, .field-group select:focus { border-color: var(--sage); }
+
+
+.section-divider { font-size: 11px; font-weight: 700; color: var(--slate); text-transform: uppercase; letter-spacing: 1px; margin: 18px 0 10px; padding-bottom: 6px; border-bottom: 1px solid var(--border-light); }
+
+
+.generate-btn {
+background: var(--sage-dark);
+color: white;
+border: none;
+padding: 13px 28px;
+border-radius: 9px;
+font-size: 14px;
+font-weight: 600;
+font-family: 'DM Sans', sans-serif;
+cursor: pointer;
+transition: background 0.2s;
+margin-top: 8px;
+display: inline-flex;
+align-items: center;
+gap: 8px;
+}
+.generate-btn:hover { background: var(--sage); }
+
+
+.download-btn {
+background: var(--slate-dark);
+color: white;
+border: none;
+padding: 11px 22px;
+border-radius: 9px;
+font-size: 13px;
+font-weight: 600;
+font-family: 'DM Sans', sans-serif;
+cursor: pointer;
+transition: background 0.2s;
+display: inline-flex;
+align-items: center;
+gap: 8px;
+}
+.download-btn:hover { background: var(--slate); }
+
+
+/* ═══ OFFICIAL DORA FORM REPLICA ═══ */
+.dora-form {
+background: white;
+border: 1px solid #ccc;
+padding: 36px 40px;
+font-family: Arial, sans-serif;
+font-size: 12px;
+color: #000;
+max-width: 760px;
+margin: 0 auto;
+}
+
+
+.dora-header {
+display: flex;
+align-items: flex-start;
+gap: 12px;
+margin-bottom: 16px;
+padding-bottom: 8px;
+}
+
+
+.dora-logo-block { display: flex; flex-direction: column; }
+
+
+.dora-logo-text { font-size: 13px; font-weight: 700; letter-spacing: 1px; color: #000; line-height: 1.3; }
+.dora-logo-sub { font-size: 9px; color: #444; line-height: 1.4; margin-top: 2px; }
+
+
+.dora-title-bar {
+background: #000;
+color: white;
+text-align: center;
+padding: 4px 12px;
+font-size: 12px;
+font-weight: 700;
+letter-spacing: 0.5px;
+margin-bottom: 16px;
+}
+
+
+.dora-line {
+display: flex;
+align-items: flex-end;
+gap: 6px;
+margin-bottom: 12px;
+flex-wrap: wrap;
+}
+
+
+.dora-label { font-size: 11px; color: #000; white-space: nowrap; }
+.dora-field { border-bottom: 1px solid #000; flex: 1; min-width: 120px; height: 18px; font-size: 11px; padding: 0 4px; position: relative; }
+.dora-field-value { font-size: 11px; color: #000; }
+.dora-field-hint { font-size: 8px; color: #444; display: block; margin-top: 1px; font-style: italic; }
+
+
+.dora-capacity-line { margin-bottom: 16px; }
+.dora-capacity-label { font-size: 11px; }
+
+
+.dora-checkbox-line {
+display: flex;
+align-items: center;
+gap: 6px;
+margin-bottom: 14px;
+font-size: 11px;
+}
+
+
+.dora-checkbox {
+width: 14px; height: 14px;
+border: 1px solid #000;
+display: inline-flex;
+align-items: center;
+justify-content: center;
+font-size: 10px;
+flex-shrink: 0;
+}
+
+
+.dora-hours-line { display: flex; align-items: flex-end; gap: 6px; margin-bottom: 16px; font-size: 11px; flex-wrap: wrap; }
+
+
+.dora-emp-header { font-weight: 700; font-size: 12px; margin-bottom: 8px; }
+
+
+.dora-address-line { margin-bottom: 10px; }
+
+
+.dora-certify { font-size: 11px; line-height: 1.6; margin: 16px 0; }
+
+
+.dora-sig-grid {
+display: grid;
+grid-template-columns: 1fr 1fr;
+gap: 12px;
+margin: 14px 0;
+}
+
+
+.dora-sig-field { border-bottom: 1px solid #000; height: 28px; margin-bottom: 2px; }
+.dora-sig-label { font-size: 9px; color: #444; }
+
+
+.dora-footer-note {
+font-style: italic;
+font-size: 10px;
+font-weight: 700;
+text-align: center;
+line-height: 1.5;
+margin: 16px 0;
+color: #000;
+}
+
+
+.dora-address-footer {
+text-align: center;
+font-size: 10px;
+color: #0000ff;
+margin-top: 12px;
+border-top: 1px solid #eee;
+padding-top: 8px;
+}
+
+
+/* ═══ OVERVIEW DOC — matches submitted template exactly ═══ */
+.overview-doc {
+background: white;
+border: 1px solid var(--border);
+border-radius: 4px;
+padding: 40px 48px;
+font-family: Arial, sans-serif;
+font-size: 11pt;
+color: #000;
+max-width: 780px;
+margin: 0 auto;
+line-height: 1.5;
+}
+
+
+.ov-header { margin-bottom: 18px; }
+.ov-title { font-size: 12pt; font-weight: 700; color: #000; margin-bottom: 2px; text-align: left; }
+.ov-sub { font-size: 10pt; color: #000; margin-bottom: 10px; }
+.ov-meta { font-size: 11pt; color: #000; line-height: 2; }
+.ov-meta span { display: block; }
+
+
+.ov-section-title { font-size: 11pt; font-weight: 700; color: #000; margin: 18px 0 6px; }
+.ov-body { font-size: 11pt; color: #000; line-height: 1.6; margin-bottom: 8px; }
+
+
+.ov-table { width: 100%; border-collapse: collapse; font-size: 10pt; margin: 8px 0; }
+.ov-table th { background: #fff; color: #000; font-weight: 700; padding: 6px 8px; text-align: left; border: 1px solid #000; }
+.ov-table td { padding: 6px 8px; border: 1px solid #000; color: #000; vertical-align: top; line-height: 1.5; }
+.ov-table tr:nth-child(even) td { background: #fff; }
+
+
+.ov-status { color: #000; font-weight: 400; font-size: 10pt; }
+
+
+.ov-bullet { padding-left: 20px; margin: 6px 0; list-style: disc; }
+.ov-bullet li { font-size: 11pt; color: #000; margin-bottom: 4px; line-height: 1.6; }
+
+
+/* JOB DESC DOC */
+.jd-doc {
+background: white;
+border: 1px solid var(--border);
+border-radius: 8px;
+padding: 36px 40px;
+font-family: 'DM Sans', sans-serif;
+max-width: 760px;
+margin: 0 auto;
+}
+
+
+.jd-logo { border: 2px dashed var(--border); border-radius: 6px; padding: 14px; text-align: center; color: var(--ink-light); font-size: 12px; font-style: italic; margin-bottom: 16px; }
+
+
+.jd-title { font-size: 20px; font-weight: 700; color: #000; margin-bottom: 14px; text-align: center; }
+
+
+.jd-meta { font-size: 12px; color: #222; line-height: 2; margin-bottom: 16px; border-bottom: 1px solid #ddd; padding-bottom: 16px; }
+.jd-meta strong { font-weight: 700; }
+
+
+.jd-section { margin-bottom: 18px; }
+.jd-section-title { font-size: 13px; font-weight: 700; color: #000; margin-bottom: 8px; border-bottom: 1px solid #eee; padding-bottom: 4px; }
+.jd-body { font-size: 12px; color: #222; line-height: 1.75; margin-bottom: 10px; }
+.jd-body strong { font-weight: 700; color: #000; }
+
+
+.jd-sig { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin-top: 20px; padding-top: 16px; border-top: 1px solid #ddd; }
+.jd-sig-field { border-bottom: 1px solid #000; height: 32px; margin-bottom: 4px; }
+.jd-sig-label { font-size: 10px; color: #444; }
+
+
+/* Print output area */
+#print-output { display: none; }
+
+
+/* Two pathway overview cards on overview page */
+.pathway-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 14px; margin: 20px 0; }
+.pathway-card {
+background: var(--white);
+border: 1px solid var(--border-light);
+border-radius: 12px;
+overflow: hidden;
+box-shadow: 0 1px 4px rgba(0,0,0,0.04);
+}
+.pathway-card-head { padding: 14px 16px; font-size: 13px; font-weight: 600; border-bottom: 1px solid var(--border-light); }
+.pathway-card-body { padding: 14px 16px; font-size: 13px; color: var(--ink-mid); line-height: 1.65; }
+.pathway-card-note { font-size: 12px; font-weight: 600; margin-top: 8px; }
+
+
+.tag {
+display: inline-block;
+padding: 2px 10px;
+border-radius: 12px;
+font-size: 11px;
+font-weight: 600;
+margin-bottom: 6px;
+}
+.tag-sage { background: var(--sage-light); color: var(--sage-dark); }
+.tag-slate { background: var(--slate-light); color: var(--slate-dark); }
+.tag-blush { background: var(--blush-light); color: #6b3c10; }
+
+
+@media (max-width: 768px) {
+.app-header { padding: 14px 20px; }
+.tab-nav { padding: 0 16px; }
+.content-wrap { padding: 28px 18px; }
+.pathway-grid { grid-template-columns: 1fr; }
+.field-grid { grid-template-columns: 1fr; }
+.field-grid.three { grid-template-columns: 1fr; }
+}
+
+
+@media print {
+#app > .app-header, #app > .tab-nav { display: none !important; }
+.collapsible { border: none; }
+.coll-head { display: none; }
+.coll-body { display: block !important; padding: 0; }
+}
+</style>
+
+
+</head>
+<body>
+
+
+<!-- PASSWORD SCREEN -->
+
+
+<div id="pw-screen">
+  <div class="pw-wrap">
+    <div class="pw-icon">🔒</div>
+    <div class="pw-title">NHA Licensure Guide</div>
+    <div class="pw-sub">This document is confidential and intended for authorized personnel only. Enter the access password to continue.</div>
+    <input type="password" class="pw-input" id="pw-input" placeholder="Enter password" onkeydown="if(event.key==='Enter')checkPw()">
+    <button class="pw-btn" onclick="checkPw()">Unlock Document</button>
+    <div class="pw-error" id="pw-error">Incorrect password. Please try again.</div>
+  </div>
+</div>
+
+
+<!-- MAIN APP -->
+
+
+<div id="app">
+  <div class="app-header">
+    <div class="header-left">
+      <div class="header-dot"></div>
+      <div>
+        <div class="header-title">Colorado NHA Licensure Guide</div>
+        <div class="header-sub">3 CCR 717-1 — State Board of Examiners of Nursing Home Administrators</div>
+      </div>
+    </div>
+    <div class="header-badge">Confidential — Internal Use Only</div>
+  </div>
+
+
+  <div class="tab-nav">
+    <button class="tab-btn active" onclick="showTab('overview',this)">Overview</button>
+    <button class="tab-btn" onclick="showTab('p1',this)">Pathway 1 — Master's Degree</button>
+    <button class="tab-btn" onclick="showTab('p2',this)">Pathway 2 — ANHA (Rule 1.7C)</button>
+    <button class="tab-btn" onclick="showTab('p3',this)">Pathway 3 — Endorsement</button>
+    <button class="tab-btn" onclick="showTab('resources',this)">Resources &amp; State Documents</button>
+  </div>
+
+
+  <!-- ════════════ OVERVIEW ════════════ -->
+
+
+  <div class="tab-content active" id="tab-overview">
+    <div class="content-wrap">
+      <h1>Colorado NHA Licensure</h1>
+      <p class="page-sub">This guide walks administrators through each of the three realistic Colorado NHA licensure pathways. Each pathway tab contains step-by-step instructions, required documents, fill-in templates, and auto-generated printable documents.</p>
+
+
+  <div class="philosophy">
+    <h3>⚡ The Philosophy Behind This Guide</h3>
+    <p>When an application lands at DORA, it is first reviewed by an entry-level staff member. That person makes one of two decisions:</p>
+    <ul style="margin-top:10px;">
+      <li><strong style="color:#a8c4b0;">Push it through</strong> — approve the application for examination. This is the goal.</li>
+      <li><strong style="color:#e8a0a0;">Send to board review</strong> — this creates months of delay and real risk of denial.</li>
+    </ul>
+    <p style="margin-top:12px;">A reviewer sends to board review any time they see something missing, unclear, or questionable. <strong style="color:#e8e4dc;">Our goal is to make every application so complete and so clear that the reviewer has no legitimate reason to escalate it.</strong> Every document maps directly to a rule requirement. When a reviewer reads our application, every question they could ask is already answered in front of them. That is why our applicants get pushed through.</p>
+  </div>
+
+
+  <h2>The Three Pathways</h2>
+  <div class="pathway-grid">
+    <div class="pathway-card">
+      <div class="pathway-card-head" style="background:#e8edf5; color:#2a3860;"><span class="tag tag-slate">Pathway 1</span><br>Master's Degree</div>
+      <div class="pathway-card-body">
+        Hold a qualifying Master's degree → Submit application → Board approves to test → Pass NAB national exam* → Pass CO state exam → License issued.
+        <div class="pathway-card-note" style="color:var(--slate-dark);">No experience required. Most direct route.</div>
+      </div>
+    </div>
+    <div class="pathway-card">
+      <div class="pathway-card-head" style="background:#e8f0eb; color:#2e4a38;"><span class="tag tag-sage">Pathway 2</span><br>ANHA Experience (Rule 1.7C)</div>
+      <div class="pathway-card-body">
+        BBA or Public Admin degree + 1 year as ANHA → Submit application → Board approves to test → Pass NAB* → Pass CO state exam → License issued.
+        <div class="pathway-card-note" style="color:var(--sage-dark);">Most common path for our admins.</div>
+      </div>
+    </div>
+    <div class="pathway-card">
+      <div class="pathway-card-head" style="background:#f5ede0; color:#5a3c1a;"><span class="tag tag-blush">Pathway 3</span><br>Endorsement</div>
+      <div class="pathway-card-body">
+        Active NHA license actively used for 12 consecutive months → Submit application → Pass CO state exam → License issued.
+        <div class="pathway-card-note" style="color:#6b3c10;">License must be actively held AND used.</div>
+      </div>
+    </div>
+  </div>
+  <div class="box box-slate" style="margin-top:4px;">
+    <strong>* About the NAB National Exam</strong>
+    NAB is <strong>not</strong> a prerequisite to apply in Colorado. If you have already passed the NAB Core and NHA modules — for example, through another state's licensure process — include your official NAB score reports with your application and note it in your Application Overview. If you have not yet taken NAB, that is completely fine: Colorado will authorize you to sit for NAB (and the Colorado state exam) once your application is approved by the Board.
+  </div>
+
+
+  <h2>Applies to All Pathways</h2>
+  <ul class="checklist" style="background:white; border:1px solid var(--border-light); border-radius:10px; padding:8px 20px;">
+    <li><div><strong>All documents must be received within one year of the application date</strong><span class="sub">Incomplete applications are closed after one year and require full resubmission.</span></div></li>
+    <li><div><strong>Both exams must be completed within one year of Board approval to sit</strong><span class="sub">Failure requires reapplication and all fees.</span></div></li>
+    <li><div><strong>All NHA licenses expire February 28 each year</strong><span class="sub">60-day grace period applies. Beyond 60 days requires formal reinstatement.</span></div></li>
+    <li><div><strong>Name and address changes must be reported within 30 days</strong><span class="sub">Email or fax notification to DORA is acceptable.</span></div></li>
+    <li><div><strong>Apply online: apps2.colorado.gov/dora/licensing/default.aspx</strong><span class="sub">Contact: dora_nha@state.co.us | 303-894-7800</span></div></li>
+  </ul>
+</div>
+
+
+  </div>
+
+
+  <!-- ════════════ PATHWAY 1 ════════════ -->
+
+
+  <div class="tab-content" id="tab-p1">
+    <div class="content-wrap">
+      <h1>Pathway 1 — Master's Degree</h1>
+      <p class="page-sub">Under <strong>Rule 1.7(B)</strong>, any applicant who holds a qualifying Master's degree may apply to sit for the Colorado NHA examination immediately. No work experience is required.</p>
+      <div class="box box-slate" style="margin-top:14px;">
+        <strong>📘 NAB Timing</strong>
+        The NAB national exam (Core + NHA modules) is <strong>not</strong> a prerequisite to applying. Colorado will authorize you to schedule NAB after the Board approves your application. If you have already passed NAB in another state, include your official score reports with your application — they satisfy Rule 1.6 and nothing further is needed on the national exam.
+      </div>
+
+
+  <div class="box box-sage">
+    <strong>✓ Direct Route</strong>
+    A Master's degree in Business Administration (MBA) or Management alone qualifies an applicant to sit for examination. No experience, no AIT, no additional requirements beyond the degree. This is the fastest path to licensure eligibility.
+  </div>
+
+
+  <h2>Step-by-Step Process</h2>
+  <div class="steps">
+    <div class="step"><div class="step-num">1</div><div><div class="step-label">Hold a Qualifying Master's Degree</div><div class="step-detail">From a regionally accredited institution recognized by the U.S. Department of Education.</div></div></div>
+    <div class="step"><div class="step-num">2</div><div><div class="step-label">Submit Application to DORA</div><div class="step-detail">Complete the online application at apps2.colorado.gov/dora/licensing. Upload all required documents including the Application Overview and official transcripts. <strong>NAB score reports are only required at this stage if you have already passed NAB through another state.</strong> If you have not yet taken NAB, you will be authorized to schedule it after the Board approves your application.</div></div></div>
+    <div class="step"><div class="step-num">3</div><div><div class="step-label">Board Reviews and Approves</div><div class="step-detail">The Board reviews and grants approval to sit for examinations. All documents must be received within one year of the application date.</div></div></div>
+    <div class="step"><div class="step-num">4</div><div><div class="step-label">Pass NAB National Examination</div><div class="step-detail">Pass both the Core module and the NHA module of the NAB national examination. Most applicants take NAB <em>after</em> the Board approves them to test. If you have already passed NAB in another state, this step is already complete — your score reports satisfy Rule 1.6.</div></div></div>
+    <div class="step"><div class="step-num">5</div><div><div class="step-label">Pass Colorado State Examination</div><div class="step-detail">Pass the Colorado state exam covering state laws, facility licensure, building and fire safety, and NHA rules and regulations.</div></div></div>
+    <div class="step final"><div class="step-num">✓</div><div><div class="step-label" style="color:var(--sage-dark);">License Issued</div><div class="step-detail">Colorado NHA license issued upon passing both examinations.</div></div></div>
+  </div>
+
+
+  <h2>Qualifying Degrees — No Experience Required</h2>
+  <div class="box box-sage"><strong>Primary — MBA or Master's in Management</strong>Master's degree in Management or Business Administration. Sit for exam immediately upon application approval. No experience required.</div>
+  <p>Additional degrees that also qualify under this pathway:</p>
+  <ul class="checklist" style="background:white; border:1px solid var(--border-light); border-radius:10px; padding:8px 20px;">
+    <li><div><strong>Bachelor's degree or higher in Public Health Administration or Health Administration</strong></div></li>
+    <li><div><strong>Bachelor's degree or higher in Health Care Management</strong></div></li>
+    <li><div><strong>Bachelor's degree or higher in Nursing Home Administration</strong></div></li>
+    <li><div><strong>Health Services Executive (HSE) qualification</strong></div></li>
+  </ul>
+
+
+  <div class="box box-blush" style="margin-top:20px;">
+    <strong>⚠ AIT Note</strong>
+    Colorado offers an AIT program as an alternative qualifying pathway. However the AIT must be formally approved by the Colorado Board before it begins, supervised by a Colorado-licensed NHA preceptor, and completed entirely within Colorado. Out-of-state AIT programs are not accepted under any circumstance. Due to the complexity, length, and risk of the AIT process, it is not featured in this guide.
+  </div>
+
+
+  <h2>Application Overview Document — Pathway 1</h2>
+  <p>Complete and submit this overview document as the first item in your application packet. Fill in all highlighted fields with your information.</p>
+
+
+  <div class="collapsible">
+    <button class="coll-head" onclick="toggleColl(this)">📄 View / Generate Application Overview — Pathway 1 <span class="coll-arrow">▼</span></button>
+    <div class="coll-body">
+      <div class="autofill-section">
+        <h3>Enter Your Information to Auto-Generate Document</h3>
+        <div class="field-grid">
+          <div class="field-group"><label>First Name</label><input type="text" id="p1-fname" placeholder="First Name"></div>
+          <div class="field-group"><label>Last Name</label><input type="text" id="p1-lname" placeholder="Last Name"></div>
+        </div>
+        <div class="field-grid">
+          <div class="field-group"><label>Date of Birth</label><input type="text" id="p1-dob" placeholder="MM/DD/YYYY"></div>
+          <div class="field-group"><label>Application Date</label><input type="text" id="p1-appdate" placeholder="MM/DD/YYYY"></div>
+        </div>
+        <div class="field-grid one">
+          <div class="field-group"><label>Degree (e.g. Master of Business Administration)</label><input type="text" id="p1-degree" placeholder="Master of Business Administration"></div>
+        </div>
+        <div class="field-grid one">
+          <div class="field-group"><label>Institution Name</label><input type="text" id="p1-school" placeholder="University Name"></div>
+        </div>
+        <button class="generate-btn" onclick="generateP1Overview()">⚡ Generate Document</button>
+      </div>
+      <div id="p1-overview-output" style="display:none; margin-top:20px;">
+        <div style="display:flex; gap:10px; margin-bottom:16px; align-items:center;">
+          <button class="download-btn" onclick="printSection('p1-overview-print')">🖨 Print / Save as PDF</button>
+          <span style="font-size:12px; color:var(--ink-light);">Use browser's Print → Save as PDF to create a downloadable file.</span>
+        </div>
+        <div id="p1-overview-content" class="overview-doc"></div>
+      </div>
+    </div>
+  </div>
+
+
+  <h2>Required Documents — Pathway 1</h2>
+  <div class="card">
+    <div class="card-head" style="background:#e8edf5; color:#2a3860;">📋 Document Checklist</div>
+    <div class="card-body">
+      <ul class="checklist">
+        <li><div><strong>Application Overview Document</strong><span class="sub">Completed and signed. Submit as the first document in your packet.</span></div></li>
+        <li><div><strong>Completed Application Form (via DPO Online Services)</strong><span class="sub">apps2.colorado.gov/dora/licensing/default.aspx</span></div></li>
+        <li><div><strong>Application Fee</strong><span class="sub">Current fee listed on the DORA website at time of application.</span></div></li>
+        <li><div><strong>Official University or College Transcripts</strong><span class="sub">Transcripts have been ordered from the university and will be delivered directly to the Board via the official transcript delivery system. Include a note confirming this if not yet received.</span></div></li>
+        <li><div><strong>NAB Examination Score Reports (Core + NHA Modules) — <em>only if already taken</em></strong><span class="sub">If you have already passed NAB Core and NHA (e.g., through another state), request that official score reports be sent directly from NAB to the Colorado Board and include a note in your Application Overview. If you have not yet taken NAB, skip this item — Colorado will authorize you to test after the Board approves your application.</span></div></li>
+        <li><div><strong>HSE Documentation (if applicable)</strong><span class="sub">Only required if qualifying via Health Services Executive designation rather than a degree.</span></div></li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+
+  </div>
+
+
+  <!-- ════════════ PATHWAY 2 ════════════ -->
+
+
+  <div class="tab-content" id="tab-p2">
+    <div class="content-wrap">
+      <h1>Pathway 2 — ANHA Experience (Rule 1.7C)</h1>
+      <p class="page-sub">Under <strong>Rule 1.7(C)</strong>, an applicant who holds a Bachelor's degree in Business or Public Administration AND has completed one year of qualifying administrative experience as an <strong>Assistant Nursing Home Administrator</strong> may apply for the Colorado NHA examination.</p>
+      <div class="box box-slate" style="margin-top:14px;">
+        <strong>📘 NAB Timing</strong>
+        The NAB national exam is <strong>not</strong> a prerequisite to submitting your application. Colorado will authorize you to schedule NAB once the Board approves you to test. If you have already passed NAB through another state's licensure process, include your official score reports — they satisfy Rule 1.6.
+      </div>
+
+
+  <div class="box box-rose">
+    <strong>🚨 Title Requirement</strong>
+    Under the Rule 1.7(C) pathway, the only job title that will be used and recognized is <strong>Assistant Nursing Home Administrator (ANHA)</strong>. Do not use any other title on your verification forms, job descriptions, or overview document. Any other title will invite scrutiny and risk board review or denial.
+  </div>
+
+
+  <div class="philosophy">
+    <h3>⚡ Why Documentation Is Everything on This Pathway</h3>
+    <p>The Colorado Board reviews experience under Rule 1.7(C) with extreme scrutiny. Their default posture is to look for reasons to question whether the experience qualifies. An entry-level reviewer who sees anything unclear, missing, or ambiguous will escalate to full board review — adding months to the process and creating real risk of denial.</p>
+    <ul style="margin-top:10px;">
+      <li>Every document explicitly addresses a specific rule requirement. The reviewer does not have to interpret anything.</li>
+      <li>The Application Overview maps each requirement to the evidence. The reviewer sees everything answered before them.</li>
+      <li>The job description documents all three required elements of Rule 1.7(E). If any element is missing, the experience will be questioned.</li>
+      <li>The Verification of Experience Form must be signed by a Licensed NHA — not just a supervisor.</li>
+      <li><strong style="color:#a8c4b0;">When the packet is complete, a reviewer should be able to approve it in under five minutes without any escalation.</strong></li>
+    </ul>
+  </div>
+
+
+  <h2>Step-by-Step Process</h2>
+  <div class="steps">
+    <div class="step"><div class="step-num">1</div><div><div class="step-label">Hold a Qualifying Bachelor's Degree</div><div class="step-detail">Bachelor's degree in Business Administration or Public Administration from a regionally accredited institution.</div></div></div>
+    <div class="step"><div class="step-num">2</div><div><div class="step-label">Complete One Year as Assistant Nursing Home Administrator</div><div class="step-detail">One full year of qualifying administrative experience titled Assistant Nursing Home Administrator (ANHA). Experience must be within two years immediately preceding the application date. May be combined across multiple facilities.</div></div></div>
+    <div class="step"><div class="step-num">3</div><div><div class="step-label">Prepare Your Application Packet</div><div class="step-detail">Assemble all documents — Application Overview, Verification of Experience Form(s), Job Description(s), and transcripts. Use the templates below. <strong>If you have already passed NAB through another state, include those score reports too.</strong> Otherwise, you will be authorized to take NAB after Board approval.</div></div></div>
+    <div class="step"><div class="step-num">4</div><div><div class="step-label">Submit Application to DORA</div><div class="step-detail">Complete the online application. Select the closest matching degree option in the dropdown. Note in your Application Overview that you qualify under Rule 1.7(C) with a Bachelor's in Business or Public Administration plus one year of qualifying experience.</div></div></div>
+    <div class="step"><div class="step-num">5</div><div><div class="step-label">Board Reviews and Approves</div><div class="step-detail">A complete, well-organized packet is reviewed at staff level and pushed through. An incomplete or ambiguous packet goes to board review. Our documentation eliminates that risk.</div></div></div>
+    <div class="step"><div class="step-num">6</div><div><div class="step-label">Pass NAB National Examination</div><div class="step-detail">Pass both the Core module and the NHA module of the NAB national examination. Most applicants take NAB <em>after</em> the Board approves them to test. If you have already passed NAB in another state, this step is already complete — your score reports satisfy Rule 1.6.</div></div></div>
+    <div class="step"><div class="step-num">7</div><div><div class="step-label">Pass Colorado State Examination</div><div class="step-detail">Pass the Colorado state examination covering state laws, facility licensure, fire safety, and NHA rules and regulations.</div></div></div>
+    <div class="step final"><div class="step-num">✓</div><div><div class="step-label" style="color:var(--sage-dark);">License Issued</div><div class="step-detail">Colorado NHA license issued upon passing both examinations.</div></div></div>
+  </div>
+
+
+  <h2>Experience Requirements — Rule 1.7(E) and 1.7(F)</h2>
+  <p>Qualifying experience <strong>must include all three of the following elements</strong>. If any element is missing from the documentation, the Board will question whether the experience qualifies.</p>
+  <div class="card">
+    <div class="card-body">
+      <ul class="checklist">
+        <li><div><strong>Rule 1.7(E)(1) — Day-to-day, on-site supervision of subordinates</strong><span class="sub">Direct responsibility for supervising, directing, managing, monitoring, or exercising reasonable control over subordinates for one year. The number of direct reports must be documented.</span></div></li>
+        <li><div><strong>Rule 1.7(E)(2) — Coordination of interdisciplinary patient care</strong><span class="sub">Coordination of interdisciplinary patient care and services across nursing, rehab, dietary, social services, and other departments.</span></div></li>
+        <li><div><strong>Rule 1.7(E)(3) — Planning, finance, budget, and policy involvement</strong><span class="sub">Planning, organizing, and controlling events toward a goal — including involvement in finance, budget, and policy-making decisions.</span></div></li>
+      </ul>
+    </div>
+  </div>
+  <div class="box box-rose">
+    <strong>🚫 Excluded Duties — Rule 1.7(F)</strong>
+    Experience does NOT include: housekeeping, laundry, food service, activities, medical records, bookkeeping, or clerical responsibilities. These do not count toward the one-year requirement even if performed at a qualifying facility. Confirm in writing that the role contained none of these duties.
+  </div>
+
+
+  <h2>Who Should Sign the Verification Forms</h2>
+  <div class="box box-blush">
+    <strong>📌 Signing Authority — Follow This Order</strong>
+    <strong>First choice:</strong> If your previous employer had a Licensed NHA as your preceptor or direct supervisor, and that person is willing to sign the Verification of Experience Form — use them. This is the most straightforward path.<br><br>
+    <strong>If unavailable:</strong> If your previous employer's Licensed NHA is unwilling or unavailable to sign, contact your Cottonwood regional administrator for guidance on the appropriate signing authority for your specific situation.<br><br>
+    The Verification of Experience Form must be signed by a Licensed Nursing Home Administrator. The rule does not require the signing NHA to be licensed in Colorado — a licensed NHA from any state is acceptable.
+  </div>
+
+
+  <h2>Official Colorado Verification of Experience Form</h2>
+  <div class="box box-sage">
+    <strong>📄 Use the Official DORA Form</strong>
+    This is the exact form published by the Colorado Department of Regulatory Agencies (DORA). Use this original file — do not retype or recreate the form. Print one copy per facility, fill it out, and have your Licensed NHA sign it. Include the signed original(s) with your application packet.
+    <div style="margin-top:14px; display:flex; gap:10px; flex-wrap:wrap;">
+      <a href="documents/NHA-Experience-Verification.pdf" target="_blank" rel="noopener" class="download-btn" style="text-decoration:none; display:inline-block;">📥 Open / Download Official Verification Form (PDF)</a>
+    </div>
+  </div>
+
+
+  <h2>Enter Your Information — Generate All Documents</h2>
+  <div class="autofill-section">
+    <h3>Fill in once — generates all three Pathway 2 documents</h3>
+    <div class="section-divider">Applicant Information</div>
+    <div class="field-grid">
+      <div class="field-group"><label>First Name</label><input type="text" id="p2-fname" placeholder="First Name"></div>
+      <div class="field-group"><label>Last Name</label><input type="text" id="p2-lname" placeholder="Last Name"></div>
+    </div>
+    <div class="field-grid">
+      <div class="field-group"><label>Date of Birth</label><input type="text" id="p2-dob" placeholder="MM/DD/YYYY"></div>
+      <div class="field-group"><label>Application Date</label><input type="text" id="p2-appdate" placeholder="MM/DD/YYYY"></div>
+    </div>
+    <div class="field-grid">
+      <div class="field-group"><label>Degree (BBA or BPA)</label><input type="text" id="p2-degree" placeholder="e.g. Bachelor of Business Administration"></div>
+      <div class="field-group"><label>Institution</label><input type="text" id="p2-school" placeholder="University Name"></div>
+    </div>
+
+
+    <div class="section-divider">Facility 1 (Primary / Longest Experience)</div>
+    <div class="field-grid">
+      <div class="field-group"><label>Facility Name</label><input type="text" id="p2-f1name" placeholder="Facility Name"></div>
+      <div class="field-group"><label>City, State</label><input type="text" id="p2-f1city" placeholder="City, State"></div>
+    </div>
+    <div class="field-grid">
+      <div class="field-group"><label>Street Address</label><input type="text" id="p2-f1addr" placeholder="Street Address"></div>
+      <div class="field-group"><label>City, State, Zip</label><input type="text" id="p2-f1csz" placeholder="City, State Zip"></div>
+    </div>
+    <div class="field-grid three">
+      <div class="field-group"><label>Start Date</label><input type="text" id="p2-f1start" placeholder="MM/DD/YYYY"></div>
+      <div class="field-group"><label>End Date</label><input type="text" id="p2-f1end" placeholder="MM/DD/YYYY"></div>
+      <div class="field-group"><label>Hours Per Week</label><input type="text" id="p2-f1hrs" placeholder="e.g. 45+"></div>
+    </div>
+    <div class="field-grid">
+      <div class="field-group"><label>Signing NHA Name</label><input type="text" id="p2-f1nha" placeholder="Full Name"></div>
+      <div class="field-group"><label>NHA License # (with State)</label><input type="text" id="p2-f1lic" placeholder="e.g. CA NHA 7310"></div>
+    </div>
+
+
+    <div class="section-divider">Facility 2 (If experience spans two facilities — otherwise leave blank)</div>
+    <div class="field-grid">
+      <div class="field-group"><label>Facility Name</label><input type="text" id="p2-f2name" placeholder="Facility Name (if applicable)"></div>
+      <div class="field-group"><label>City, State</label><input type="text" id="p2-f2city" placeholder="City, State"></div>
+    </div>
+    <div class="field-grid">
+      <div class="field-group"><label>Street Address</label><input type="text" id="p2-f2addr" placeholder="Street Address"></div>
+      <div class="field-group"><label>City, State, Zip</label><input type="text" id="p2-f2csz" placeholder="City, State Zip"></div>
+    </div>
+    <div class="field-grid three">
+      <div class="field-group"><label>Start Date</label><input type="text" id="p2-f2start" placeholder="MM/DD/YYYY"></div>
+      <div class="field-group"><label>End Date</label><input type="text" id="p2-f2end" placeholder="MM/DD/YYYY"></div>
+      <div class="field-group"><label>Hours Per Week</label><input type="text" id="p2-f2hrs" placeholder="e.g. 45+"></div>
+    </div>
+    <div class="field-grid">
+      <div class="field-group"><label>Signing NHA Name</label><input type="text" id="p2-f2nha" placeholder="Full Name"></div>
+      <div class="field-group"><label>NHA License # (with State)</label><input type="text" id="p2-f2lic" placeholder="e.g. CO NHA.0003176"></div>
+    </div>
+
+
+    <div class="section-divider">Additional Information</div>
+    <div class="field-grid">
+      <div class="field-group"><label>Number of Direct Reports</label><input type="text" id="p2-reports" placeholder="e.g. 6"></div>
+      <div class="field-group"><label>Other State NHA License # (if held)</label><input type="text" id="p2-otherlicense" placeholder="e.g. Montana NHA 12345 (optional)"></div>
+    </div>
+
+
+    <button class="generate-btn" onclick="generateP2All()">⚡ Generate All Documents</button>
+  </div>
+
+
+  <!-- GENERATED DOCS -->
+  <div id="p2-docs-output" style="display:none;">
+
+
+    <h2>Generated Documents — Ready to Print</h2>
+    <div class="box box-sage">✅ All three documents have been generated with your information. Use the Print buttons to open the print dialog — select "Save as PDF" to create a downloadable file for each document.</div>
+
+
+    <div class="collapsible">
+      <button class="coll-head" onclick="toggleColl(this)">📄 Document 1 — Application Overview <span class="coll-arrow">▼</span></button>
+      <div class="coll-body open">
+        <button class="download-btn" onclick="printSection('p2-ov-print')" style="margin-bottom:16px;">🖨 Print / Save as PDF</button>
+        <div id="p2-ov-content" class="overview-doc"></div>
+      </div>
+    </div>
+
+
+    <div class="collapsible" style="margin-top:10px;">
+      <button class="coll-head" onclick="toggleColl(this)">📄 Document 2 — Official DORA Verification of Experience (Facility 1) <span class="coll-arrow">▼</span></button>
+      <div class="coll-body open">
+        <div class="box box-blush" style="margin-bottom:12px; font-size:13px;"><strong>📌 Convenience Template — Pre-filled with Your Information</strong> This is a convenience template populated with the data you entered above. For the official blank form published by DORA, use the <a href="documents/NHA-Experience-Verification.pdf" target="_blank" rel="noopener"><strong>Open / Download Official Verification Form (PDF)</strong></a> button in the section above and print one copy per facility.</div>
+        <button class="download-btn" onclick="printSection('p2-dora1-print')" style="margin-bottom:16px;">🖨 Print / Save as PDF</button>
+        <div id="p2-dora1-content" class="dora-form"></div>
+      </div>
+    </div>
+
+
+    <div id="p2-dora2-wrap" class="collapsible" style="margin-top:10px; display:none;">
+      <button class="coll-head" onclick="toggleColl(this)">📄 Document 3 — Official DORA Verification of Experience (Facility 2) <span class="coll-arrow">▼</span></button>
+      <div class="coll-body open">
+        <div class="box box-blush" style="margin-bottom:12px; font-size:13px;"><strong>📌 Convenience Template — Pre-filled for Facility 2</strong> Populated with the data you entered for Facility 2. For the official blank form, use the <a href="documents/NHA-Experience-Verification.pdf" target="_blank" rel="noopener"><strong>Open / Download Official Verification Form (PDF)</strong></a> link above.</div>
+        <button class="download-btn" onclick="printSection('p2-dora2-print')" style="margin-bottom:16px;">🖨 Print / Save as PDF</button>
+        <div id="p2-dora2-content" class="dora-form"></div>
+      </div>
+    </div>
+
+
+    <div class="collapsible" style="margin-top:10px;">
+      <button class="coll-head" onclick="toggleColl(this)">📄 Job Description — ANHA <span class="coll-arrow">▼</span></button>
+      <div class="coll-body open">
+        <div class="box box-blush" style="margin-bottom:12px; font-size:13px;"><strong>📌 One per facility.</strong> If experience was at two facilities, use this template for each — have the Licensed NHA at each facility sign the version for their facility. Add your facility logo at the top.</div>
+        <button class="download-btn" onclick="printSection('p2-jd-print')" style="margin-bottom:16px;">🖨 Print / Save as PDF</button>
+        <div id="p2-jd-content" class="jd-doc"></div>
+      </div>
+    </div>
+  </div>
+
+
+  <h2>Document Checklist — Pathway 2</h2>
+  <div class="card">
+    <div class="card-head" style="background:#e8f0eb; color:#2e4a38;">📋 Complete Checklist</div>
+    <div class="card-body">
+      <ul class="checklist">
+        <li><div><strong>Application Overview Document</strong><span class="sub">Generated and completed above. First document in your packet.</span></div></li>
+        <li><div><strong>Completed Application Form (DPO Online Services)</strong><span class="sub">Select the closest degree option. Note Rule 1.7(C) in your overview.</span></div></li>
+        <li><div><strong>Application Fee</strong></div></li>
+        <li><div><strong>Official DORA Verification of Experience Form — one per facility</strong><span class="sub">Use the official blank form: <a href="documents/NHA-Experience-Verification.pdf" target="_blank" rel="noopener">Open / Download PDF</a>. Signed by a Licensed NHA. Two forms required if experience spans two facilities.</span></div></li>
+        <li><div><strong>Job Description — ANHA — one per facility</strong><span class="sub">Must document all three Rule 1.7(E) elements. One if one facility, two if two facilities.</span></div></li>
+        <li><div><strong>Official University or College Transcripts</strong><span class="sub">Transcripts have been ordered and will be delivered directly to the Board via the official transcript delivery system. Include a note confirming this if delivery is pending.</span></div></li>
+        <li><div><strong>NAB Examination Score Reports (Core + NHA) — <em>only if already taken</em></strong><span class="sub">If you have already passed NAB through another state's licensure process, request that official score reports be sent directly from NAB to the Colorado Board. If you have not yet taken NAB, skip this item — Colorado authorizes applicants to test after the Board approves the application.</span></div></li>
+        <li><div><strong>License Verification for Each Signing NHA</strong><span class="sub">Screenshot or printout from the official state licensing database confirming active status. Include verification date.</span></div></li>
+        <li><div><strong>Current NHA License from Another State (if held)</strong><span class="sub">Optional but recommended. Documents existing licensure in good standing.</span></div></li>
+      </ul>
+    </div>
+  </div>
+  <div class="box box-rose" style="margin-top:12px;">
+    <strong>🚨 Remember</strong>
+    An entry-level reviewer who sees anything missing, unclear, or ambiguous will escalate to board review. Board review adds months to the process. A complete, well-organized packet gets pushed through at staff level. Every document above exists to make the reviewer's job effortless and give them no reason to escalate.
+  </div>
+</div>
+
+
+  </div>
+
+
+  <!-- ════════════ PATHWAY 3 ════════════ -->
+
+
+  <div class="tab-content" id="tab-p3">
+    <div class="content-wrap">
+      <h1>Pathway 3 — Endorsement</h1>
+      <p class="page-sub">Under <strong>Rule 1.8</strong>, an applicant who holds an active NHA license in another state may apply for Colorado licensure by endorsement through the Occupational Credential Portability Program.</p>
+
+
+  <div class="box box-rose">
+    <strong>🚨 Critical — Read This First</strong>
+    The applicant must have held an active, unrestricted NHA license AND actively practiced as a licensed nursing home administrator for one full consecutive year — 12 months — immediately preceding the date the application is received. Both conditions must be met for the entire 12-month period. A license held but not actively practiced under does not satisfy this requirement. There are no exceptions.
+  </div>
+
+
+  <h2>Step-by-Step Process</h2>
+  <div class="steps">
+    <div class="step"><div class="step-num">1</div><div><div class="step-label">Hold a Current, Active, Unrestricted NHA License</div><div class="step-detail">Active in another state or territory at the time of application. The license must be unrestricted and in good standing.</div></div></div>
+    <div class="step"><div class="step-num">2</div><div><div class="step-label">Actively Practice for 12 Consecutive Months</div><div class="step-detail">Actively practice as a licensed nursing home administrator for 12 consecutive months immediately preceding the application date. The license must be actively held AND actively used in practice. This 12-month window must end immediately before application — a prior period followed by a gap does not qualify.</div></div></div>
+    <div class="step"><div class="step-num">3</div><div><div class="step-label">Submit Application to DORA</div><div class="step-detail">Complete the online application with all required documents and the application fee.</div></div></div>
+    <div class="step"><div class="step-num">4</div><div><div class="step-label">Board Reviews and Approves</div><div class="step-detail">The Board reviews and grants approval to sit for the Colorado state examination.</div></div></div>
+    <div class="step"><div class="step-num">5</div><div><div class="step-label">Pass Colorado State Examination</div><div class="step-detail">Pass the Colorado state exam. The NAB national exam requirement is satisfied by the exam passed in the originating state.</div></div></div>
+    <div class="step final"><div class="step-num">✓</div><div><div class="step-label" style="color:var(--sage-dark);">License Issued</div><div class="step-detail">Colorado NHA license issued upon passing the Colorado state examination.</div></div></div>
+  </div>
+
+
+  <h2>All Four Eligibility Requirements — All Must Be Met</h2>
+  <div class="card"><div class="card-head" style="background:var(--rose-light); color:#7f1d1d;">Requirement 1 — Active License</div><div class="card-body"><p>Must hold a current, active, and unrestricted NHA license in good standing in another state or territory at the time of application.</p></div></div>
+  <div class="card"><div class="card-head" style="background:var(--rose-light); color:#7f1d1d;">Requirement 2 — 12 Consecutive Months of Active Practice</div><div class="card-body"><p>Must have actively practiced as a licensed nursing home administrator for <strong>12 consecutive months immediately preceding</strong> the application date. The license must be actively held AND actively used in practice for the entire period. Holding a license without practicing under it does not qualify. The 12 months must end immediately before the application date — not a prior period.</p></div></div>
+  <div class="card"><div class="card-head" style="background:var(--slate-light); color:#2a3860;">Requirement 3 — National Examination</div><div class="card-body"><p>Must have passed the NAB national examination in the state where currently licensed.</p></div></div>
+  <div class="card"><div class="card-head" style="background:var(--slate-light); color:#2a3860;">Requirement 4 — Colorado State Examination</div><div class="card-body"><p>Must schedule and pass the Colorado state examination within one year of being approved to sit.</p></div></div>
+
+
+  <div class="box box-rose" style="margin-top:8px;">
+    <strong>🚫 Does Not Count Toward 12 Months</strong>
+    Experience as an Assistant Nursing Home Administrator, Administrator-in-Training, or in any role under the supervision of another licensed NHA does not satisfy the 12-month active practice requirement. The applicant must have held and actively used their own NHA license as the licensed administrator of record for the full 12 consecutive months.
+  </div>
+
+
+  <h2>Application Overview Document — Pathway 3</h2>
+  <div class="collapsible">
+    <button class="coll-head" onclick="toggleColl(this)">📄 View / Generate Application Overview — Pathway 3 <span class="coll-arrow">▼</span></button>
+    <div class="coll-body">
+      <div class="autofill-section">
+        <h3>Enter Your Information</h3>
+        <div class="field-grid">
+          <div class="field-group"><label>First Name</label><input type="text" id="p3-fname" placeholder="First Name"></div>
+          <div class="field-group"><label>Last Name</label><input type="text" id="p3-lname" placeholder="Last Name"></div>
+        </div>
+        <div class="field-grid">
+          <div class="field-group"><label>Date of Birth</label><input type="text" id="p3-dob" placeholder="MM/DD/YYYY"></div>
+          <div class="field-group"><label>Application Date</label><input type="text" id="p3-appdate" placeholder="MM/DD/YYYY"></div>
+        </div>
+        <div class="field-grid">
+          <div class="field-group"><label>State Where Licensed</label><input type="text" id="p3-licstate" placeholder="e.g. Montana"></div>
+          <div class="field-group"><label>License Number</label><input type="text" id="p3-licnum" placeholder="License Number"></div>
+        </div>
+        <div class="field-grid">
+          <div class="field-group"><label>Active Practice Start Date</label><input type="text" id="p3-practstart" placeholder="MM/DD/YYYY"></div>
+          <div class="field-group"><label>Active Practice End Date / Present</label><input type="text" id="p3-practend" placeholder="MM/DD/YYYY or Present"></div>
+        </div>
+        <div class="field-grid one">
+          <div class="field-group"><label>Facility Where Practiced</label><input type="text" id="p3-facility" placeholder="Facility Name, City, State"></div>
+        </div>
+        <button class="generate-btn" onclick="generateP3Overview()">⚡ Generate Document</button>
+      </div>
+      <div id="p3-overview-output" style="display:none; margin-top:20px;">
+        <button class="download-btn" onclick="printSection('p3-ov-print')" style="margin-bottom:16px;">🖨 Print / Save as PDF</button>
+        <div id="p3-ov-content" class="overview-doc"></div>
+      </div>
+    </div>
+  </div>
+
+
+  <h2>Required Documents — Pathway 3</h2>
+  <div class="card">
+    <div class="card-head" style="background:var(--blush-light); color:#5a3c1a;">📋 Document Checklist</div>
+    <div class="card-body">
+      <ul class="checklist">
+        <li><div><strong>Application Overview Document</strong><span class="sub">Generated above. First document in your packet.</span></div></li>
+        <li><div><strong>Completed Application Form (DPO Online Services)</strong></div></li>
+        <li><div><strong>Application Fee</strong></div></li>
+        <li><div><strong>Verification of Active License from Issuing State</strong><span class="sub">Official printout from the state licensing database confirming current, active, unrestricted license. Include license number and expiration date.</span></div></li>
+        <li><div><strong>Verification of 12 Consecutive Months of Active Practice</strong><span class="sub">Documentation confirming active practice as the licensed NHA for the full 12 months immediately preceding application.</span></div></li>
+        <li><div><strong>NAB Examination Score Reports</strong><span class="sub">Verifies passing scores on national examination from originating state.</span></div></li>
+        <li><div><strong>Official University or College Transcripts</strong><span class="sub">Transcripts have been ordered and will be delivered directly to the Board via the official transcript delivery system.</span></div></li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+
+  </div>
+
+  <\!-- ════════════ RESOURCES ════════════ -->
+
+
+  <div class="tab-content" id="tab-resources">
+    <div class="content-wrap">
+      <h1>Resources &amp; State Documents</h1>
+      <p class="page-sub">The official Colorado documents, rules, and regulations referenced throughout this guide. Each link opens the original PDF — nothing here has been rewritten or summarized. Review these any time you need the authoritative source.</p>
+
+
+      <h2>Forms</h2>
+      <div class="card">
+        <div class="card-head" style="background:var(--sage-light); color:#2e4a38;">📄 Fillable &amp; Printable Forms</div>
+        <div class="card-body">
+          <ul class="checklist">
+            <li><div><strong><a href="documents/NHA-Experience-Verification.pdf" target="_blank" rel="noopener">NHA Experience Verification Form</a></strong><span class="sub">Official DORA form signed by a Licensed NHA to verify qualifying administrative experience for Pathway 2 (Rule 1.7(C)). Print one per facility.</span></div></li>
+          </ul>
+        </div>
+      </div>
+
+
+      <h2>Colorado Rules &amp; Regulations</h2>
+      <div class="card">
+        <div class="card-head" style="background:var(--slate-light); color:#2a3860;">⚖️ Statute &amp; Administrative Rules</div>
+        <div class="card-body">
+          <ul class="checklist">
+            <li><div><strong><a href="documents/3-CCR-717-1.pdf" target="_blank" rel="noopener">3 CCR 717-1 — Rules &amp; Regulations of the State Board of Examiners of Nursing Home Administrators</a></strong><span class="sub">Full text of the Colorado administrative rules governing NHA licensure, including all pathway requirements (Rules 1.6, 1.7, 1.8), experience definitions, exam requirements, continuing education, and disciplinary procedures.</span></div></li>
+            <li><div><strong><a href="documents/NHA-Practice-Act.pdf" target="_blank" rel="noopener">Nursing Home Administrators Practice Act</a></strong><span class="sub">The Colorado statute creating and empowering the Board of Examiners of Nursing Home Administrators and establishing the legal framework for NHA licensure in the state.</span></div></li>
+            <li><div><strong><a href="documents/NHA-Board-Policies.pdf" target="_blank" rel="noopener">Nursing Home Administrators Board Policies</a></strong><span class="sub">Current policies adopted by the Colorado NHA Board, including positions on experience evaluation, AIT programs, continuing education, and other discretionary matters.</span></div></li>
+            <li><div><strong><a href="documents/Key-Definitions-and-Actions.pdf" target="_blank" rel="noopener">Key Definitions and Actions</a></strong><span class="sub">Reference sheet of key regulatory terms and actions (e.g. qualifying experience, active license, endorsement) that are cited throughout the rules.</span></div></li>
+          </ul>
+        </div>
+      </div>
+
+
+      <h2>Application Examples &amp; Reference Documents</h2>
+      <div class="card">
+        <div class="card-head" style="background:var(--blush-light); color:#5a3c1a;">📘 Guidance &amp; Examples</div>
+        <div class="card-body">
+          <ul class="checklist">
+            <li><div><strong><a href="documents/Pathway-2-Overview-Example.pdf" target="_blank" rel="noopener">Pathway 2 — Rule 1.7(C) Application Overview Example</a></strong><span class="sub">A worked example of a Pathway 2 Application Overview document to reference while preparing your own. Use this as a style reference for how requirements should be mapped to evidence.</span></div></li>
+            <li><div><strong><a href="documents/Colorado-NHA-License-Overview.pdf" target="_blank" rel="noopener">Colorado NHA License — Pathway Overview (Original)</a></strong><span class="sub">Internal reference document outlining the Colorado NHA licensure pathways and process.</span></div></li>
+            <li><div><strong><a href="documents/Colorado-NHA-License-Overview-v2.pdf" target="_blank" rel="noopener">Colorado NHA License — Pathway Overview (Revised)</a></strong><span class="sub">Updated internal reference document with additional pathway notes and guidance.</span></div></li>
+          </ul>
+        </div>
+      </div>
+
+
+      <h2>In-Browser PDF Viewer</h2>
+      <div class="box box-sage">
+        Tap any document name to open it in a new tab. On most desktop browsers, the PDF will render directly in the browser — no download required. On mobile, the file may download automatically depending on your browser and settings.
+      </div>
+
+
+      <div class="box box-blush" style="margin-top:14px;">
+        <strong>📌 Source of Truth</strong>
+        If anything in this guide ever conflicts with the documents above, the official DORA documents govern. Always verify against the originals before submitting your application.
+      </div>
+    </div>
+  </div>
+
+</div>
+
+
+<script>
+// ── PASSWORD ──
+function checkPw() {
+  const val = document.getElementById('pw-input').value;
+  const err = document.getElementById('pw-error');
+  if (btoa(unescape(encodeURIComponent(val))) === btoa(unescape(encodeURIComponent('Cottonwood1!')))) {
+    document.getElementById('pw-screen').style.display = 'none';
+    document.getElementById('app').classList.add('visible');
+    document.body.style.background = '#f5f2ee';
+  } else {
+    err.style.display = 'block';
+    document.getElementById('pw-input').value = '';
+  }
+}
+document.getElementById('pw-input').addEventListener('keydown', e => { if(e.key==='Enter') checkPw(); });
+
+
+// ── TABS ──
+function showTab(id, btn) {
+  document.querySelectorAll('.tab-content').forEach(t => t.classList.remove('active'));
+  document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+  document.getElementById('tab-'+id).classList.add('active');
+  btn.classList.add('active');
+}
+
+
+// ── COLLAPSIBLE ──
+function toggleColl(btn) {
+  btn.classList.toggle('open');
+  btn.nextElementSibling.classList.toggle('open');
+}
+
+
+// ── PRINT ──
+function printSection(id) {
+  const el = document.getElementById(id);
+  if (!el) { window.print(); return; }
+  const w = window.open('','','width=900,height=700');
+  w.document.write('<html><head><style>body{font-family:Arial,sans-serif;margin:32px;font-size:12px;color:#000;}</style></head><body>');
+
+
+w.document.write(el.innerHTML);
+w.document.write('</body></html>');
+w.document.close();
+w.focus();
+setTimeout(() => { w.print(); }, 400);
+}
+
+
+// ── HELPERS ──
+function v(id) { return document.getElementById(id)?.value?.trim() || ''; }
+function fill(id, html) { const el = document.getElementById(id); if(el) el.innerHTML = html; }
+
+
+// ── DORA FORM HTML ──
+function doraFormHTML(fname, lname, dob, f_name, f_addr, f_csz, f_start, f_end, f_hrs, nha_name, nha_lic) {
+const fullName = fname + ' ' + lname;
+return `
+
+
+  <div class="dora-header">
+    <div style="display:flex;align-items:center;gap:10px;">
+      <div style="width:60px;height:60px;border:1px solid #ccc;border-radius:4px;display:flex;align-items:center;justify-content:center;font-size:9px;color:#999;text-align:center;padding:4px;">CO DORA<br>Seal</div>
+      <div class="dora-logo-block">
+        <div class="dora-logo-text">COLORADO</div>
+        <div class="dora-logo-sub">Department of<br>Regulatory Agencies<br>Division of Professions and Occupations</div>
+      </div>
+    </div>
+  </div>
+  <div class="dora-title-bar">VERIFICATION OF EXPERIENCE | Nursing Home Administrator</div>
+  <div class="dora-line">
+    <span class="dora-label">This is to certify that</span>
+    <div class="dora-field"><span class="dora-field-value">${fullName}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;${dob}</span><span class="dora-field-hint">(Applicant Name) (Date of Birth)</span></div>
+  </div>
+  <div class="dora-line">
+    <span class="dora-label">was working in</span>
+    <div class="dora-field" style="max-width:160px;"><span class="dora-field-value">Nursing Home</span><span class="dora-field-hint">(Type of Facility)</span></div>
+    <span class="dora-label">of</span>
+    <div class="dora-field"><span class="dora-field-value">${f_name}</span><span class="dora-field-hint">(Facility Name)</span></div>
+  </div>
+  <div class="dora-line" style="align-items:flex-start; margin-bottom:6px;">
+    <span class="dora-label" style="margin-top:4px;">in the following capacity</span>
+    <div style="flex:1;">
+      <div class="dora-field"><span class="dora-field-value">Assistant Nursing Home Administrator — Day-to-day, on-site responsibility for supervising staff, managing facility operations, and coordinating interdisciplinary care.</span><span class="dora-field-hint">(Nursing Home Administrator/DON/Other-explain)</span></div>
+    </div>
+  </div>
+  <div class="dora-checkbox-line">
+    <div class="dora-checkbox">✓</div>
+    <span>I have attached a job description for the above named individual.</span>
+  </div>
+  <div class="dora-hours-line">
+    <span class="dora-label">The above named practiced for</span>
+    <div class="dora-field" style="max-width:60px;"><span class="dora-field-value">${f_hrs || '45+'}</span></div>
+    <span class="dora-label">hours per week, from</span>
+    <div class="dora-field" style="max-width:100px;"><span class="dora-field-value">${f_start}</span><span class="dora-field-hint">(mm/dd/yyyy)</span></div>
+    <span class="dora-label">to</span>
+    <div class="dora-field" style="max-width:120px;"><span class="dora-field-value">${f_end}</span><span class="dora-field-hint">(mm/dd/yyyy)</span></div>
+  </div>
+  <div class="dora-emp-header">Place of Employment:</div>
+  <div class="dora-address-line">
+    <div class="dora-line"><span class="dora-label">Address</span><div class="dora-field"><span class="dora-field-value">${f_addr}</span><span class="dora-field-hint">(Number and Street)</span></div></div>
+  </div>
+  <div class="dora-line"><div class="dora-field"><span class="dora-field-value">${f_csz}</span><span class="dora-field-hint">(City, State, Zip)</span></div></div>
+  <div class="dora-certify">I certify that all statements made on this form are true, complete and correct to the best of my knowledge and belief and are made in good faith.</div>
+  <div class="dora-sig-grid">
+    <div><div class="dora-sig-field"></div><div class="dora-sig-label">Employer's Signature Type or print Name</div></div>
+    <div><div class="dora-sig-field" style="padding-top:4px;font-size:11px;">${nha_name}</div><div class="dora-sig-label">&nbsp;</div></div>
+  </div>
+  <div class="dora-sig-grid">
+    <div><div class="dora-sig-field" style="padding-top:4px;font-size:11px;">Licensed Nursing Home Administrator</div><div class="dora-sig-label">Employer's Title/Position</div></div>
+    <div><div class="dora-sig-field"></div><div class="dora-sig-label">Date &nbsp;&nbsp;&nbsp; License: ${nha_lic}</div></div>
+  </div>
+  <div class="dora-footer-note">Applicant: You must submit a separate Verification of Experience form for each place of employment and<br>for each job title you wish to have considered.</div>
+  <div class="dora-address-footer">1560 Broadway, Suite 1350, Denver, CO 80202 | P 303.894.7800 | F 303.894.7693 | dpo.colorado.gov</div>
+  `;
+}
+
+
+// ── OVERVIEW HTML (Pathway 1) ──
+function generateP1Overview() {
+const fn = v('p1-fname'), ln = v('p1-lname'), dob = v('p1-dob'), appdate = v('p1-appdate');
+const deg = v('p1-degree') || 'Master of Business Administration', school = v('p1-school') || 'Regionally accredited institution';
+const fullName = fn + ' ' + ln;
+const html = `
+
+
+  <div class="ov-header">
+    <div class="ov-title">APPLICATION FOR INITIAL LICENSURE BY EXAMINATION</div>
+    <div class="ov-sub">Colorado Board of Examiners of Nursing Home Administrators | 3 CCR 717-1</div>
+    <div class="ov-meta">
+      <span><strong>Applicant:</strong> ${fullName}</span>
+      <span><strong>Date of Birth:</strong> ${dob}</span>
+      <span><strong>Application Date:</strong> ${appdate}</span>
+      <span><strong>Licensure Pathway:</strong> Initial Licensure by Examination — Rule 1.7(B)</span>
+    </div>
+  </div>
+  <div class="ov-section-title">Compliance Overview</div>
+  <p class="ov-body">This application satisfies all requirements for licensure by examination under 3 CCR 717-1.7. Each requirement, its governing rule citation, and its supporting documentation are summarized below.</p>
+  <table class="ov-table">
+    <tr><th>Requirement</th><th>Rule Citation</th><th>Status</th><th>Supporting Basis</th></tr>
+    <tr><td>Education</td><td>Rule 1.7(B)</td><td><span class="ov-status">Met</span></td><td>${deg} from ${school}. Degree qualifies applicant to sit for examination immediately under Rule 1.7(B) with no additional experience required.</td></tr>
+    <tr><td>National Examination</td><td>Rule 1.6</td><td><span class="ov-status">Met</span></td><td>Passing scores on NAB Core and NHA modules. Official score reports will be delivered directly from NAB to the Board.</td></tr>
+  </table>
+  <div class="ov-section-title">1. Education</div>
+  <p class="ov-body"><strong>Requirement — Rule 1.7(B):</strong> A qualifying Master's degree from a regionally accredited institution. No additional experience required.</p>
+  <ul class="ov-bullet">
+    <li><strong>Degree:</strong> ${deg}</li>
+    <li><strong>Institution:</strong> ${school}</li>
+    <li><strong>Transcripts:</strong> Official transcripts have been ordered from the university and will be delivered directly to the Board via the official transcript delivery system. If transcripts have already been received, please confirm receipt.</li>
+  </ul>
+  <div class="ov-section-title">2. National Examination</div>
+  <p class="ov-body"><strong>Requirement — Rule 1.6:</strong> Passing score on the examinations administered by the National Association of Long Term Care Administrator Boards (NAB).</p>
+  <ul class="ov-bullet">
+    <li>NAB Core examination — passing score verified</li>
+    <li>NHA module examination — passing score verified</li>
+    <li>Official score reports have been requested and will be directly delivered from NAB to the Board.</li>
+  </ul>
+  <div class="ov-section-title">3. Document Inventory</div>
+  <table class="ov-table">
+    <tr><th>#</th><th>Document</th><th>Satisfies</th></tr>
+    <tr><td>1</td><td>Official University Transcripts — ${deg}</td><td>Rule 1.7(B) — Education requirement</td></tr>
+    <tr><td>2</td><td>NAB Score Reports — Core and NHA Modules</td><td>Rule 1.6 — National examination</td></tr>
+  </table>
+  <div class="ov-section-title">4. Conclusion</div>
+  <p class="ov-body">All requirements for initial licensure by examination under 3 CCR 717-1.7(B) have been satisfied. The applicant holds a qualifying Master's degree from a regionally accredited institution and has passed the required national examinations.</p>
+  <p class="ov-body"><strong>This application is submitted for the Board's approval.</strong></p>
+  <div style="margin-top:28px; display:grid; grid-template-columns:1fr 1fr; gap:24px;">
+    <div><div style="border-bottom:1px solid #000;height:32px;"></div><div style="font-size:10px;color:#444;margin-top:3px;">Applicant Signature</div><div style="font-size:11px;margin-top:2px;color:#222;">${fullName} &nbsp;&nbsp; Date: ___________</div></div>
+  </div>`;
+  fill('p1-overview-content', html);
+  document.getElementById('p1-overview-output').style.display = 'block';
+}
+
+
+// ── OVERVIEW HTML (Pathway 2) ──
+function p2OverviewHTML(fn, ln, dob, appdate, deg, school, f1n, f1city, f1start, f1end, f2n, f2city, f2start, f2end, reports, otherlicense) {
+const fullName = fn + ' ' + ln;
+const hasFac2 = f2n && f2n.trim() !== '';
+const facilities = hasFac2 ? `${f1n} and ${f2n}` : f1n;
+const facilityRows = hasFac2
+? `<tr><td>${f1n}</td><td>${f1city}</td><td>${f1start}</td><td>${f1end}</td><td>Asst. NHA</td></tr> <tr><td>${f2n}</td><td>${f2city}</td><td>${f2start}</td><td>${f2end}</td><td>Asst. NHA</td></tr> <tr><td><strong>Combined Total</strong></td><td></td><td></td><td></td><td><strong>One Full Year</strong></td></tr>`
+: `<tr><td>${f1n}</td><td>${f1city}</td><td>${f1start}</td><td>${f1end}</td><td>Asst. NHA</td></tr> <tr><td><strong>Total</strong></td><td></td><td></td><td></td><td><strong>One Full Year</strong></td></tr>`;
+
+
+const otherLicRow = otherlicense ? `<tr><td>${hasFac2 ? '8' : '7'}*</td><td>Current NHA License — ${otherlicense} (Not required but recommended if active)</td><td>Current licensure in good standing</td></tr>` : '';
+
+
+return `
+
+
+  <div class="ov-header">
+    <div class="ov-title">APPLICATION FOR INITIAL LICENSURE BY EXAMINATION</div>
+    <div class="ov-sub">Colorado Board of Examiners of Nursing Home Administrators | 3 CCR 717-1</div>
+    <div class="ov-meta">
+      <span><strong>Applicant:</strong> ${fullName}</span>
+      <span><strong>Date of Birth:</strong> ${dob}</span>
+      <span><strong>Application Date:</strong> ${appdate}</span>
+      <span><strong>Licensure Pathway:</strong> Initial Licensure by Examination — Rule 1.7(C)</span>
+    </div>
+  </div>
+  <div class="ov-section-title">Compliance Overview</div>
+  <p class="ov-body">This application satisfies all requirements for licensure by examination under 3 CCR 717-1.7(C). Each requirement, its governing rule citation, and its supporting documentation are summarized below.</p>
+  <table class="ov-table">
+    <tr><th>Requirement</th><th>Rule Citation</th><th>Status</th><th>Supporting Basis</th></tr>
+    <tr><td>Education</td><td>Rule 1.7(C)</td><td><span class="ov-status">Met</span></td><td>${deg} from ${school}, an accredited institution. Degree is specifically enumerated in Rule 1.7(C).</td></tr>
+    <tr><td>Experience — Quantity</td><td>Rule 1.7(C)</td><td><span class="ov-status">Met</span></td><td>One full year of qualifying experience: ${f1start} – ${f2end || f1end}. Within the two-year lookback window.</td></tr>
+    <tr><td>Experience — Quality</td><td>Rule 1.7(E)</td><td><span class="ov-status">Met</span></td><td>Documented on-site supervisory authority over ${reports || '[#]'} direct reports, IDT coordination, and budget and policy responsibilities${hasFac2 ? ' at both facilities' : ''}.</td></tr>
+    <tr><td>Experience — Excluded Duties</td><td>Rule 1.7(F)</td><td><span class="ov-status">Met</span></td><td>Role contained no housekeeping, laundry, food service, activities, medical records, bookkeeping, or clerical responsibilities.</td></tr>
+    <tr><td>National Examination</td><td>Rule 1.6</td><td><span class="ov-status">Met</span></td><td>Passing scores on NAB Core and NHA modules. Official score reports will be delivered directly from NAB to the Board.</td></tr>
+    <tr><td>Employer Verification</td><td>Rule 1.7</td><td><span class="ov-status">Met</span></td><td>Signed verification forms from Licensed Nursing Home Administrators at ${facilities}.</td></tr>
+  </table>
+  <div class="ov-section-title">1. Education</div>
+  <p class="ov-body"><strong>Requirement — Rule 1.7(C):</strong> A Bachelor's degree in Business or Public Administration, combined with one year of qualifying administrative experience.</p>
+  <ul class="ov-bullet">
+    <li><strong>Degree:</strong> ${deg}</li>
+    <li><strong>Institution:</strong> ${school}</li>
+    <li><strong>Transcripts:</strong> Official transcripts have been ordered from the university and will be delivered directly to the Board via the official transcript delivery system. If transcripts have already been received, please confirm receipt.</li>
+  </ul>
+  <div class="ov-section-title">2. Professional Experience</div>
+  <p class="ov-body"><strong>Requirement — Rule 1.7(C) and Rule 1.7(E):</strong> One year of experience in administration in a nursing home, requiring day-to-day on-site supervisory responsibility, IDT coordination, and involvement in planning, finance, budget, and policy decisions.</p>
+  <table class="ov-table">
+    <tr><th>Facility</th><th>Location</th><th>Start Date</th><th>End Date</th><th>Title</th></tr>
+    ${facilityRows}
+  </table>
+  <table class="ov-table" style="margin-top:12px;">
+    <tr><th>Rule 1.7(E) Element</th><th>Documented Duties</th></tr>
+    <tr><td><strong>Rule 1.7(E)(1) — Day-to-day on-site supervision of subordinates</strong></td><td>Direct supervision and performance management of ${reports || '[#]'} department heads and their subordinate teams, including recruitment, professional development, evaluation, and corrective action authority. Independently exercised administrative authority over all department leaders. Verified by Licensed NHA at ${hasFac2 ? 'each facility' : 'the facility'}.</td></tr>
+    <tr><td><strong>Rule 1.7(E)(2) — Coordination of interdisciplinary patient care</strong></td><td>Directed Interdisciplinary Team (IDT) meetings across Nursing, Rehabilitation, Dietary, and Social Services departments. Coordinated care planning, facility transitions, and resident outcomes across all clinical disciplines. Served as the facility's authorized administrative representative during state and federal surveys.</td></tr>
+    <tr><td><strong>Rule 1.7(E)(3) — Planning, finance, budget, and policy involvement</strong></td><td>Active participation in budget planning, labor management, and resource allocation. Responsible for implementation and oversight of administrative policies ensuring CMS and regulatory compliance. Directed the facility's Quality Assurance and Performance Improvement (QAPI) program.</td></tr>
+    <tr><td><strong>Rule 1.7(F) — Excluded duties confirmation</strong></td><td>The Assistant Nursing Home Administrator role did not include housekeeping, laundry, food service, activities, medical records, bookkeeping, or clerical responsibilities. All duties performed were administrative and operational in nature as documented in the attached job descriptions.</td></tr>
+  </table>
+  <div class="ov-section-title">3. National Examination</div>
+  <p class="ov-body"><strong>Requirement — Rule 1.6:</strong> Passing score on the examinations administered by the National Association of Long Term Care Administrator Boards (NAB).</p>
+  <ul class="ov-bullet">
+    <li>NAB Core examination — passing score verified</li>
+    <li>NHA module examination — passing score verified</li>
+    <li>Official score reports have been requested and will be directly delivered from NAB to the Board.</li>
+  </ul>
+  <div class="ov-section-title">4. Document Inventory</div>
+  <table class="ov-table">
+    <tr><th>#</th><th>Document</th><th>Satisfies</th></tr>
+    <tr><td>1</td><td>Experience Verification Form — ${f1n} — Signed by ${v('p2-f1nha') || '[NHA Name]'}, Licensed NHA | License No. ${v('p2-f1lic') || '[License #]'}</td><td>Rule 1.7 — Experience verification</td></tr>
+    ${hasFac2 ? `<tr><td>2</td><td>Experience Verification Form — ${f2n} — Signed by ${v('p2-f2nha') || '[NHA Name]'}, Licensed NHA | License No. ${v('p2-f2lic') || '[License #]'}</td><td>Rule 1.7 — Experience verification</td></tr>` : ''}
+    <tr><td>${hasFac2 ? '3' : '2'}</td><td>Job Description — ANHA, ${f1n}</td><td>Rule 1.7(E)(F) — Administrative duties</td></tr>
+    ${hasFac2 ? `<tr><td>4</td><td>Job Description — ANHA, ${f2n}</td><td>Rule 1.7(E)(F) — Administrative duties</td></tr>` : ''}
+    <tr><td>${hasFac2 ? '5' : '3'}</td><td>Official University Transcripts — ${deg}</td><td>Rule 1.7(C) — Education requirement</td></tr>
+    <tr><td>${hasFac2 ? '6' : '4'}</td><td>NAB Score Reports — Core and NHA Modules</td><td>Rule 1.6 — National examination</td></tr>
+    ${otherLicRow}
+  </table>
+  <div class="ov-section-title">5. Conclusion</div>
+  <p class="ov-body">All requirements for initial licensure by examination under 3 CCR 717-1.7(C) have been satisfied. The applicant holds a qualifying degree, has completed one year of documented administrative experience in skilled nursing facilities, has passed the required national examinations, and has submitted all supporting documentation verified by Licensed Nursing Home Administrators.</p>
+  <p class="ov-body"><strong>This application is submitted for the Board's approval.</strong></p>
+  <div style="margin-top:28px; display:grid; grid-template-columns:1fr 1fr; gap:24px;">
+    <div><div style="border-bottom:1px solid #000;height:32px;"></div><div style="font-size:10px;color:#444;margin-top:3px;">Applicant Signature</div><div style="font-size:11px;margin-top:2px;color:#222;">${fullName} &nbsp;&nbsp; Date: ___________</div></div>
+  </div>`;
+}
+
+
+// ── JOB DESCRIPTION HTML ──
+function jdHTML(fn, ln, dob, f1n, f1start, nha_name, reports) {
+const fullName = fn + ' ' + ln;
+return `
+
+
+  <div class="jd-logo">[ Insert Facility Logo Here — use facility letterhead if available ]</div>
+  <div class="jd-title">ASSISTANT NURSING HOME ADMINISTRATOR (ANHA)</div>
+  <div class="jd-meta">
+    <strong>EMPLOYEE:</strong> ${fullName}<br>
+    <strong>FACILITY:</strong> ${f1n}<br>
+    <strong>REPORTS TO:</strong> ${nha_name}, Licensed Nursing Home Administrator<br>
+    <strong>FLSA STATUS:</strong> Exempt / Administrative<br>
+    <strong>EFFECTIVE DATE:</strong> ${f1start}
+  </div>
+  <div class="jd-section">
+    <div class="jd-section-title">POSITION SUMMARY</div>
+    <p class="jd-body">The Assistant Nursing Home Administrator provides high-level operational leadership within the Skilled Nursing Facility (SNF). Reporting to the Nursing Home Administrator (NHA), the ANHA is responsible for the oversight of facility-wide systems, personnel management, and regulatory adherence. This role is granted the independent administrative authority to manage department leaders and ensure the delivery of care meets all state and federal requirements.</p>
+  </div>
+  <div class="jd-section">
+    <div class="jd-section-title">CORE PERFORMANCE AREAS</div>
+    <p class="jd-body"><strong>Operational Leadership &amp; Personnel Management</strong> Directly oversees the daily performance and management of the facility's department heads. This role carries the responsibility of supervising <strong>${reports || '[#]'} direct reports</strong> and their subordinate teams. Key duties include the recruitment, professional development, and performance evaluation of the leadership team, ensuring that all personnel actions align with facility protocols and high-performance standards.</p>
+    <p class="jd-body"><strong>Clinical &amp; Interdisciplinary Oversight</strong> Directs the facility's Interdisciplinary Team (IDT) to ensure a cohesive approach to resident care. This involves coordinating efforts across Nursing, Rehabilitation, Dietary, and Social Services to achieve optimal resident outcomes. The ANHA is responsible for facilitating effective communication between departments to streamline care delivery and facility transitions.</p>
+    <p class="jd-body"><strong>Administrative &amp; Fiscal Control</strong> Actively manages facility resources, including budget participation and labor management. Ensures that all facility operations remain in strict compliance with CMS and applicable state regulatory guidelines. The ANHA is responsible for the implementation of administrative policies that safeguard the facility's financial and regulatory standing.</p>
+    <p class="jd-body"><strong>Quality Management &amp; Performance Improvement</strong> Directs the facility's Quality Assurance and Performance Improvement (QAPI) program. This includes analyzing quality data, identifying areas for operational enhancement, and collaborating with stakeholders to implement sustainable improvements across the care setting.</p>
+    <p class="jd-body"><strong>Regulatory Representation</strong> Serves as an authorized administrative representative during state and federal surveys and audits. Responsible for maintaining a state of continuous survey readiness and managing the facility's response to regulatory inspections and compliance inquiries.</p>
+  </div>
+  <div class="jd-section">
+    <div class="jd-section-title">ATTESTATION &amp; SIGNATURES</div>
+    <p class="jd-body" style="font-style:italic;">I hereby certify that the administrative responsibilities and duties outlined above were performed by the employee during the period of employment at ${f1n}.</p>
+    <div class="jd-sig">
+      <div>
+        <div class="jd-sig-field"></div>
+        <div class="jd-sig-label">Employee Signature &nbsp;&nbsp; Date: ___________</div>
+        <div style="font-size:11px;margin-top:4px;color:#222;">Printed Name: ${fullName}</div>
+      </div>
+      <div>
+        <div class="jd-sig-field"></div>
+        <div class="jd-sig-label">Administrator Signature &nbsp;&nbsp; Date: ___________</div>
+        <div style="font-size:11px;margin-top:4px;color:#222;">Printed Name: ${nha_name}</div>
+        <div style="font-size:11px;color:#444;">Title: Licensed Nursing Home Administrator</div>
+        <div style="font-size:11px;color:#444;">[State] License #: ___________</div>
+      </div>
+    </div>
+  </div>`;
+}
+
+
+// ── GENERATE P2 ALL ──
+function generateP2All() {
+const fn=v('p2-fname'), ln=v('p2-lname'), dob=v('p2-dob'), appdate=v('p2-appdate');
+const deg=v('p2-degree')||'Bachelor of Business Administration', school=v('p2-school')||'Regionally accredited institution';
+const f1n=v('p2-f1name'), f1city=v('p2-f1city'), f1addr=v('p2-f1addr'), f1csz=v('p2-f1csz');
+const f1start=v('p2-f1start'), f1end=v('p2-f1end'), f1hrs=v('p2-f1hrs');
+const f1nha=v('p2-f1nha'), f1lic=v('p2-f1lic');
+const f2n=v('p2-f2name'), f2city=v('p2-f2city'), f2addr=v('p2-f2addr'), f2csz=v('p2-f2csz');
+const f2start=v('p2-f2start'), f2end=v('p2-f2end'), f2hrs=v('p2-f2hrs');
+const f2nha=v('p2-f2nha'), f2lic=v('p2-f2lic');
+const reports=v('p2-reports'), otherlicense=v('p2-otherlicense');
+const hasFac2 = f2n && f2n.trim() !== '';
+
+
+fill('p2-ov-content', p2OverviewHTML(fn,ln,dob,appdate,deg,school,f1n,f1city,f1start,f1end,f2n,f2city,f2start,f2end,reports,otherlicense));
+fill('p2-dora1-content', doraFormHTML(fn,ln,dob,f1n,f1addr,f1csz,f1start,f1end,f1hrs,f1nha,f1lic));
+fill('p2-jd-content', jdHTML(fn,ln,dob,f1n,f1start,f1nha,reports));
+
+
+if (hasFac2) {
+fill('p2-dora2-content', doraFormHTML(fn,ln,dob,f2n,f2addr,f2csz,f2start,f2end,f2hrs,f2nha,f2lic));
+document.getElementById('p2-dora2-wrap').style.display = 'block';
+} else {
+document.getElementById('p2-dora2-wrap').style.display = 'none';
+}
+
+
+document.getElementById('p2-docs-output').style.display = 'block';
+document.getElementById('p2-docs-output').scrollIntoView({behavior:'smooth', block:'start'});
+}
+
+
+// ── GENERATE P3 OVERVIEW ──
+function generateP3Overview() {
+const fn=v('p3-fname'), ln=v('p3-lname'), dob=v('p3-dob'), appdate=v('p3-appdate');
+const licstate=v('p3-licstate'), licnum=v('p3-licnum');
+const practstart=v('p3-practstart'), practend=v('p3-practend'), facility=v('p3-facility');
+const fullName = fn + ' ' + ln;
+const html = `
+
+
+  <div class="ov-header">
+    <div class="ov-title">APPLICATION FOR LICENSURE BY ENDORSEMENT</div>
+    <div class="ov-sub">Colorado Board of Examiners of Nursing Home Administrators | 3 CCR 717-1</div>
+    <div class="ov-meta">
+      <span><strong>Applicant:</strong> ${fullName}</span>
+      <span><strong>Date of Birth:</strong> ${dob}</span>
+      <span><strong>Application Date:</strong> ${appdate}</span>
+      <span><strong>Licensure Pathway:</strong> Licensure by Endorsement — Rule 1.8</span>
+    </div>
+  </div>
+  <div class="ov-section-title">Compliance Overview</div>
+  <p class="ov-body">This application satisfies all requirements for licensure by endorsement under 3 CCR 717-1.8. Each requirement, its governing rule citation, and its supporting documentation are summarized below.</p>
+  <table class="ov-table">
+    <tr><th>Requirement</th><th>Rule Citation</th><th>Status</th><th>Supporting Basis</th></tr>
+    <tr><td>Active License</td><td>Rule 1.8(B)</td><td><span class="ov-status">Met</span></td><td>Current, active, unrestricted NHA license in ${licstate}, License No. ${licnum}. License is in good standing at time of application.</td></tr>
+    <tr><td>12 Months Active Practice</td><td>Rule 1.8(B)</td><td><span class="ov-status">Met</span></td><td>Actively practiced as licensed NHA at ${facility} from ${practstart} to ${practend}. License actively held and used in practice for the full 12-consecutive-month period immediately preceding this application.</td></tr>
+    <tr><td>National Examination</td><td>Rule 1.8(C)</td><td><span class="ov-status">Met</span></td><td>Passed NAB national examination in ${licstate}. Score reports included.</td></tr>
+    <tr><td>Colorado State Examination</td><td>Rule 1.8(D)</td><td><span class="ov-status">Pending</span></td><td>Applicant will schedule and pass the Colorado state examination within one year of Board approval to sit.</td></tr>
+  </table>
+  <div class="ov-section-title">1. Active License</div>
+  <ul class="ov-bullet">
+    <li><strong>Issuing State:</strong> ${licstate}</li>
+    <li><strong>License Number:</strong> ${licnum}</li>
+    <li><strong>Status:</strong> Current, active, and unrestricted</li>
+    <li>License verification from ${licstate} licensing database included in this submission.</li>
+  </ul>
+  <div class="ov-section-title">2. Active Practice — 12 Consecutive Months</div>
+  <p class="ov-body">The applicant actively practiced as a licensed nursing home administrator at ${facility} from ${practstart} to ${practend}. The license was actively held AND actively used in practice for the full 12-consecutive-month period immediately preceding this application date. Documentation of active practice is included in this submission.</p>
+  <div class="ov-section-title">3. National Examination</div>
+  <ul class="ov-bullet">
+    <li>NAB national examination passed in ${licstate}</li>
+    <li>Official score reports included in this submission</li>
+  </ul>
+  <div class="ov-section-title">4. Document Inventory</div>
+  <table class="ov-table">
+    <tr><th>#</th><th>Document</th><th>Satisfies</th></tr>
+    <tr><td>1</td><td>Verification of Active License — ${licstate} License No. ${licnum}</td><td>Rule 1.8(B) — Active license requirement</td></tr>
+    <tr><td>2</td><td>Verification of 12 Consecutive Months of Active Practice at ${facility}</td><td>Rule 1.8(B) — Active practice requirement</td></tr>
+    <tr><td>3</td><td>NAB Examination Score Reports</td><td>Rule 1.8(C) — National examination</td></tr>
+    <tr><td>4</td><td>Official University Transcripts</td><td>Education credentials — to be delivered directly to the Board via official transcript system</td></tr>
+  </table>
+  <div class="ov-section-title">5. Conclusion</div>
+  <p class="ov-body">All eligibility requirements for licensure by endorsement under 3 CCR 717-1.8 have been satisfied. The applicant holds a current, active, unrestricted NHA license in ${licstate} and has actively practiced as a licensed nursing home administrator for 12 consecutive months immediately preceding this application date.</p>
+  <p class="ov-body"><strong>This application is submitted for the Board's approval.</strong></p>
+  <div style="margin-top:28px; display:grid; grid-template-columns:1fr 1fr; gap:24px;">
+    <div><div style="border-bottom:1px solid #000;height:32px;"></div><div style="font-size:10px;color:#444;margin-top:3px;">Applicant Signature</div><div style="font-size:11px;margin-top:2px;color:#222;">${fullName} &nbsp;&nbsp; Date: ___________</div></div>
+  </div>`;
+  fill('p3-ov-content', html);
+  document.getElementById('p3-overview-output').style.display = 'block';
+}
+
+
+// ── GENERATE P1 OVERVIEW ──
+function generateP1Overview() {
+const fn=v('p1-fname'), ln=v('p1-lname'), dob=v('p1-dob'), appdate=v('p1-appdate');
+const deg=v('p1-degree')||'Master of Business Administration', school=v('p1-school')||'Regionally accredited institution';
+const fullName = fn + ' ' + ln;
+const html = `
+
+
+  <div class="ov-header">
+    <div class="ov-title">APPLICATION FOR INITIAL LICENSURE BY EXAMINATION</div>
+    <div class="ov-sub">Colorado Board of Examiners of Nursing Home Administrators | 3 CCR 717-1</div>
+    <div class="ov-meta">
+      <span><strong>Applicant:</strong> ${fullName}</span>
+      <span><strong>Date of Birth:</strong> ${dob}</span>
+      <span><strong>Application Date:</strong> ${appdate}</span>
+      <span><strong>Licensure Pathway:</strong> Initial Licensure by Examination — Rule 1.7(B)</span>
+    </div>
+  </div>
+  <div class="ov-section-title">Compliance Overview</div>
+  <p class="ov-body">This application satisfies all requirements for licensure by examination under 3 CCR 717-1.7(B). The applicant holds a qualifying Master's degree from a regionally accredited institution. No additional experience is required under this pathway.</p>
+  <table class="ov-table">
+    <tr><th>Requirement</th><th>Rule Citation</th><th>Status</th><th>Supporting Basis</th></tr>
+    <tr><td>Education</td><td>Rule 1.7(B)</td><td><span class="ov-status">Met</span></td><td>${deg} from ${school}. Degree qualifies applicant to sit for examination immediately with no experience required.</td></tr>
+    <tr><td>National Examination</td><td>Rule 1.6</td><td><span class="ov-status">Met</span></td><td>Passing scores on NAB Core and NHA modules. Score reports to be delivered directly from NAB to the Board.</td></tr>
+  </table>
+  <div class="ov-section-title">1. Education</div>
+  <p class="ov-body"><strong>Requirement — Rule 1.7(B):</strong> A qualifying Master's degree from a regionally accredited institution. No additional experience required.</p>
+  <ul class="ov-bullet">
+    <li><strong>Degree:</strong> ${deg}</li>
+    <li><strong>Institution:</strong> ${school}</li>
+    <li><strong>Transcripts:</strong> Official transcripts have been ordered from the university and will be delivered directly to the Board via the official transcript delivery system. If transcripts have already been received, please confirm receipt.</li>
+  </ul>
+  <div class="ov-section-title">2. National Examination</div>
+  <p class="ov-body"><strong>Requirement — Rule 1.6:</strong> Passing score on examinations administered by the National Association of Long Term Care Administrator Boards (NAB).</p>
+  <ul class="ov-bullet">
+    <li>NAB Core examination — passing score verified</li>
+    <li>NHA module examination — passing score verified</li>
+    <li>Official score reports have been requested and will be directly delivered from NAB to the Board.</li>
+  </ul>
+  <div class="ov-section-title">3. Document Inventory</div>
+  <table class="ov-table">
+    <tr><th>#</th><th>Document</th><th>Satisfies</th></tr>
+    <tr><td>1</td><td>Official University Transcripts — ${deg}</td><td>Rule 1.7(B) — Education requirement</td></tr>
+    <tr><td>2</td><td>NAB Score Reports — Core and NHA Modules</td><td>Rule 1.6 — National examination</td></tr>
+  </table>
+  <div class="ov-section-title">4. Conclusion</div>
+  <p class="ov-body">All requirements for initial licensure by examination under 3 CCR 717-1.7(B) have been satisfied. The applicant holds a qualifying Master's degree from a regionally accredited institution and has passed the required national examinations.</p>
+  <p class="ov-body"><strong>This application is submitted for the Board's approval.</strong></p>
+  <div style="margin-top:28px; display:grid; grid-template-columns:1fr 1fr; gap:24px;">
+    <div><div style="border-bottom:1px solid #000;height:32px;"></div><div style="font-size:10px;color:#444;margin-top:3px;">Applicant Signature</div><div style="font-size:11px;margin-top:2px;color:#222;">${fullName} &nbsp;&nbsp; Date: ___________</div></div>
+  </div>`;
+  fill('p1-overview-content', html);
+  document.getElementById('p1-overview-output').style.display = 'block';
+}
+
+
+function printSection(sectionId) {
+const content = document.getElementById(sectionId.replace('-print','') + '-content') || document.getElementById(sectionId.replace('-print',''));
+let html = '';
+if (sectionId === 'p2-ov-print') html = document.getElementById('p2-ov-content').outerHTML;
+else if (sectionId === 'p2-dora1-print') html = document.getElementById('p2-dora1-content').outerHTML;
+else if (sectionId === 'p2-dora2-print') html = document.getElementById('p2-dora2-content').outerHTML;
+else if (sectionId === 'p2-jd-print') html = document.getElementById('p2-jd-content').outerHTML;
+else if (sectionId === 'p1-overview-print') html = document.getElementById('p1-overview-content').outerHTML;
+else if (sectionId === 'p3-ov-print') html = document.getElementById('p3-ov-content').outerHTML;
+else { window.print(); return; }
+
+
+const w = window.open('', '', 'width=900,height=750');
+w.document.write(`<html><head><style> body{font-family:Arial,sans-serif;margin:48px;font-size:11pt;color:#000;line-height:1.5;} table{width:100%;border-collapse:collapse;font-size:10pt;margin:8px 0;} th{background:#fff;color:#000;font-weight:700;padding:6px 8px;text-align:left;border:1px solid #000;} td{padding:6px 8px;border:1px solid #000;color:#000;vertical-align:top;line-height:1.5;} .ov-title{font-size:12pt;font-weight:700;margin-bottom:2px;} .ov-sub{font-size:10pt;margin-bottom:10px;} .ov-meta span{display:block;line-height:2;} .ov-section-title{font-size:11pt;font-weight:700;margin:18px 0 6px;} .ov-body{font-size:11pt;line-height:1.6;margin-bottom:8px;} .ov-bullet{padding-left:20px;list-style:disc;margin:6px 0;} .ov-bullet li{font-size:11pt;margin-bottom:4px;line-height:1.6;} .ov-status{color:#000;font-weight:400;} .dora-title-bar{background:#000;color:white;text-align:center;padding:4px 12px;font-size:12px;font-weight:700;margin-bottom:14px;} .dora-field{border-bottom:1px solid #000;display:inline-block;min-width:100px;padding:0 4px;} .dora-field-hint{font-size:8px;color:#444;display:block;} .dora-sig-field{border-bottom:1px solid #000;height:24px;margin-bottom:2px;} .dora-footer-note{font-style:italic;font-weight:700;text-align:center;font-size:10px;margin:14px 0;} .dora-address-footer{text-align:center;font-size:10px;color:#00a;border-top:1px solid #eee;padding-top:6px;} .jd-title{font-size:18px;font-weight:700;text-align:center;margin-bottom:12px;} .jd-meta{font-size:12px;line-height:2;margin-bottom:14px;border-bottom:1px solid #ddd;padding-bottom:12px;} .jd-section-title{font-size:13px;font-weight:700;border-bottom:1px solid #eee;padding-bottom:3px;margin:14px 0 8px;} .jd-sig{display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-top:16px;padding-top:12px;border-top:1px solid #ddd;} .jd-sig-field{border-bottom:1px solid #000;height:28px;margin-bottom:3px;} </style></head><body>${html}</body></html>`);
+w.document.close();
+w.focus();
+setTimeout(() => { w.print(); }, 500);
+}
+</script>
+
+
+</body>
+</html>
